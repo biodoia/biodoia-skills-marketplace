@@ -1,0 +1,11 @@
+{
+  "name": "tmux-expert",
+  "description": "Expert guidance for tmux terminal multiplexer — sessions, windows, panes, configuration, scripting, plugins, and troubleshooting",
+  "version": "0.1.0",
+  "author": {
+    "name": "Sergio Martinelli",
+    "email": "biodoia@users.noreply.github.com"
+  },
+  "license": "MIT",
+  "keywords": ["tmux", "terminal", "multiplexer", "session", "workflow"]
+}
