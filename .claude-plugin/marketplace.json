@@ -27,6 +27,34 @@
       "category": "infrastructure",
       "source": "./plugins/xen-orchestra-expert",
       "homepage": "https://github.com/biodoia/biodoia-skills-marketplace"
+    },
+    {
+      "name": "skill-master",
+      "description": "Intelligent skill ecosystem orchestrator — proactive onboarding via hooks, adaptive growth from usage patterns, MCP tools for search/recommend/analyze/evolve",
+      "category": "meta",
+      "source": "./plugins/skill-master",
+      "homepage": "https://github.com/biodoia/biodoia-skills-marketplace"
+    },
+    {
+      "name": "cli-ai-tools",
+      "description": "Expert reference for CLI AI coding assistants — Claude Code, Codex, Gemini CLI, Aider, Goose, amp, Copilot CLI, and more with commands, config, and comparison",
+      "category": "development",
+      "source": "./plugins/cli-ai-tools",
+      "homepage": "https://github.com/biodoia/biodoia-skills-marketplace"
+    },
+    {
+      "name": "tmux-expert",
+      "description": "Comprehensive tmux terminal multiplexer guide — keybindings, configuration, plugins (TPM), scripting, automation, and cyberpunk-themed configs",
+      "category": "terminal",
+      "source": "./plugins/tmux-expert",
+      "homepage": "https://github.com/biodoia/biodoia-skills-marketplace"
+    },
+    {
+      "name": "manjaro-expert",
+      "description": "Comprehensive Manjaro/Arch Linux system management — pacman, AUR, systemd, storage, networking, troubleshooting, and maintenance",
+      "category": "system-management",
+      "source": "./plugins/manjaro-expert",
+      "homepage": "https://github.com/biodoia/biodoia-skills-marketplace"
     }
   ]
 }
