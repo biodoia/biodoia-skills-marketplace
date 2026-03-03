@@ -1,0 +1,10 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "biodoia-skills-marketplace",
+  "description": "Curated Claude Code plugin marketplace by biodoia — cyberpunk skills ecosystem",
+  "owner": {
+    "name": "biodoia",
+    "email": "biodoia@users.noreply.github.com"
+  },
+  "plugins": []
+}
