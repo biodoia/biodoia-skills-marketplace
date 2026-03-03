@@ -1,0 +1,11 @@
+{
+  "name": "manjaro-expert",
+  "description": "Comprehensive Manjaro/Arch Linux system management — pacman, AUR, systemd, storage, networking, troubleshooting, and maintenance",
+  "version": "0.1.0",
+  "author": {
+    "name": "Sergio Martinelli",
+    "email": "biodoia@users.noreply.github.com"
+  },
+  "license": "MIT",
+  "keywords": ["manjaro", "arch", "linux", "pacman", "systemd", "system-management"]
+}
