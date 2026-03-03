@@ -1,0 +1,22 @@
+{
+  "name": "skill-master",
+  "description": "Intelligent skill orchestrator with proactive onboarding, adaptive growth, MCP tools, and ecosystem-wide skill management for Claude Code",
+  "version": "0.1.0",
+  "author": {
+    "name": "Sergio Martinelli",
+    "email": "biodoia@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/biodoia/biodoia-skills-marketplace",
+  "repository": "https://github.com/biodoia/biodoia-skills-marketplace",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "orchestrator",
+    "onboarding",
+    "adaptive",
+    "meta-skill",
+    "mcp",
+    "proactive",
+    "marketplace"
+  ]
+}
