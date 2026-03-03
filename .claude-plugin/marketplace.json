@@ -6,5 +6,13 @@
     "name": "biodoia",
     "email": "biodoia@users.noreply.github.com"
   },
-  "plugins": []
+  "plugins": [
+    {
+      "name": "marketplace-creator",
+      "description": "Create and manage Claude Code plugin marketplaces — scaffold plugins, manage registries, audit quality, and maintain skill ecosystems with an interactive web creator",
+      "category": "development",
+      "source": "./plugins/marketplace-creator",
+      "homepage": "https://github.com/biodoia/biodoia-skills-marketplace"
+    }
+  ]
 }
