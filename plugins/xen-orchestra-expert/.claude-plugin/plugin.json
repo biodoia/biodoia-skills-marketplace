@@ -1,0 +1,11 @@
+{
+  "name": "xen-orchestra-expert",
+  "description": "Expert guidance for Xen Orchestra (XO) VM management, XCP-ng hypervisor, backups, REST API, and infrastructure automation",
+  "version": "0.1.0",
+  "author": {
+    "name": "Sergio Martinelli",
+    "email": "biodoia@users.noreply.github.com"
+  },
+  "license": "MIT",
+  "keywords": ["xen-orchestra", "xcp-ng", "virtualization", "hypervisor", "vm", "backup", "xo-cli"]
+}
