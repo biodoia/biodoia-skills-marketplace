@@ -13,6 +13,20 @@
       "category": "development",
       "source": "./plugins/marketplace-creator",
       "homepage": "https://github.com/biodoia/biodoia-skills-marketplace"
+    },
+    {
+      "name": "tailscale-expert",
+      "description": "Expert guidance for Tailscale VPN setup, ACLs, exit nodes, subnet routing, MagicDNS, and troubleshooting",
+      "category": "networking",
+      "source": "./plugins/tailscale-expert",
+      "homepage": "https://github.com/biodoia/biodoia-skills-marketplace"
+    },
+    {
+      "name": "xen-orchestra-expert",
+      "description": "Expert guidance for Xen Orchestra (XO) VM management, XCP-ng hypervisor, backups, REST API, and infrastructure automation",
+      "category": "infrastructure",
+      "source": "./plugins/xen-orchestra-expert",
+      "homepage": "https://github.com/biodoia/biodoia-skills-marketplace"
     }
   ]
 }
