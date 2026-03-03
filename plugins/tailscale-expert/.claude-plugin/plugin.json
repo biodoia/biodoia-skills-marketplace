@@ -1,0 +1,11 @@
+{
+  "name": "tailscale-expert",
+  "description": "Expert guidance for Tailscale VPN setup, ACLs, exit nodes, subnet routing, MagicDNS, and troubleshooting",
+  "version": "0.1.0",
+  "author": {
+    "name": "Sergio Martinelli",
+    "email": "biodoia@users.noreply.github.com"
+  },
+  "license": "MIT",
+  "keywords": ["tailscale", "vpn", "wireguard", "networking", "acl", "mesh"]
+}
