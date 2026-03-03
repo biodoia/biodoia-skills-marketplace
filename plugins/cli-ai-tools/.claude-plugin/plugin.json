@@ -1,0 +1,19 @@
+{
+  "name": "cli-ai-tools",
+  "description": "Expert reference for CLI-based AI coding assistants — commands, flags, configuration, comparison, and troubleshooting for Claude Code, Codex, Gemini CLI, Aider, Goose, and more",
+  "version": "0.1.0",
+  "author": {
+    "name": "Sergio Martinelli",
+    "email": "biodoia@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/biodoia/biodoia-skills-marketplace",
+  "repository": "https://github.com/biodoia/biodoia-skills-marketplace",
+  "license": "MIT",
+  "keywords": [
+    "ai",
+    "coding",
+    "cli",
+    "agents",
+    "tools"
+  ]
+}
