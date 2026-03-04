@@ -1,11 +1,11 @@
 ---
 name: marketplace-creator
-description: Use when creating skill marketplaces, scaffolding new Claude Code plugins, managing marketplace registries, adding plugins to a marketplace, or initializing plugin repositories. Also use when the user mentions "marketplace", "scaffold plugin", "create plugin registry", "manage skills", "publish skills", or wants to create, organize, or maintain a collection of Claude Code plugins and skills.
+description: This skill should be used when the user asks about "marketplace", "scaffold plugin", "create plugin", "plugin registry", "marketplace.json", "publish skills", or "manage skills". Make sure to use this skill whenever the user wants to create a skill marketplace repository, scaffold new Claude Code plugins, register plugins in a marketplace, validate plugin structure, manage plugin versions, or organize a collection of Claude Code plugins and skills, even if they just mention creating or publishing a plugin without explicitly saying marketplace.
 ---
 
 # Marketplace Creator
 
-Create and manage Claude Code plugin marketplaces — from initializing the repository to scaffolding plugins, registering them in the marketplace registry, and maintaining quality.
+Create and manage Claude Code plugin marketplaces -- from initializing the repository to scaffolding plugins, registering them in the marketplace registry, and maintaining quality.
 
 ## Overview
 
@@ -23,26 +23,15 @@ This skill handles the full lifecycle: create the repo, scaffold plugins, regist
 - Adding a plugin to an existing marketplace registry
 - Auditing/validating marketplace or plugin structure
 - Managing plugin versions and metadata
+- Registering external plugins from third-party repositories
 
 ## Core Workflow
 
-```dot
-digraph marketplace {
-    "Init marketplace repo" [shape=box];
-    "Scaffold new plugin" [shape=box];
-    "Register in marketplace.json" [shape=box];
-    "Validate structure" [shape=diamond];
-    "Push to GitHub" [shape=box];
-    "Done" [shape=doublecircle];
-
-    "Init marketplace repo" -> "Scaffold new plugin";
-    "Scaffold new plugin" -> "Register in marketplace.json";
-    "Register in marketplace.json" -> "Validate structure";
-    "Validate structure" -> "Push to GitHub" [label="pass"];
-    "Validate structure" -> "Scaffold new plugin" [label="fix"];
-    "Push to GitHub" -> "Done";
-}
-```
+1. **Initialize marketplace repo** -- Create the repository structure with registry and plugin directories
+2. **Scaffold new plugin** -- Generate the directory layout and config files for a new plugin
+3. **Register in marketplace.json** -- Add the plugin entry to the marketplace registry
+4. **Validate structure** -- Run quality checks on all plugins and the registry
+5. **Push to GitHub** -- Commit and push the validated marketplace
 
 ## 1. Initialize Marketplace Repository
 
@@ -54,10 +43,10 @@ bash ~/.claude/skills/marketplace-creator/scripts/init-marketplace-repo.sh <repo
 ```
 
 The script creates:
-- `.claude-plugin/marketplace.json` — the registry (see `references/marketplace-schema.md`)
-- `plugins/` — directory for first-party plugins
-- `external_plugins/` — manifests for third-party plugins
-- `README.md` — marketplace documentation
+- `.claude-plugin/marketplace.json` -- the registry (see `references/marketplace-schema.md`)
+- `plugins/` -- directory for first-party plugins
+- `external_plugins/` -- manifests for third-party plugins
+- `README.md` -- marketplace documentation
 - Initializes git and pushes to GitHub via `gh`
 
 ## 2. Scaffold a New Plugin
@@ -192,19 +181,64 @@ Add a plugin to `marketplace.json`:
 }
 ```
 
-## 4. Validate Structure
+### External Plugin Registration Workflow
 
-Before pushing, validate:
+To register a third-party plugin hosted in a separate repository:
 
+1. **Verify the external repo** -- Confirm the repository contains a valid `.claude-plugin/plugin.json` with at least a `name` field, and at least one skill with a proper SKILL.md
+2. **Create an external manifest** -- Add a JSON file in `external_plugins/<plugin-name>.json` with the plugin metadata and source URL
+3. **Add to marketplace.json** -- Insert a registry entry using the URL source format (see above), optionally pinning to a specific commit SHA for stability
+4. **Validate accessibility** -- Ensure the GitHub repo is public or that the marketplace consumer has access to clone it
+5. **Test installation** -- Clone the external plugin and verify the directory structure matches expectations
+
+## 4. Plugin Quality Validation Checklist
+
+Before pushing, validate every plugin against these criteria:
+
+**Registry-level checks:**
 - [ ] `marketplace.json` has valid JSON with `$schema`, `name`, `description`, `owner`, `plugins[]`
 - [ ] Every plugin in `plugins[]` has `name`, `description`, `source`
 - [ ] First-party plugin paths exist on disk
-- [ ] Each plugin has valid `plugin.json` with at least `name`
+- [ ] No duplicate plugin names in the registry
+
+**Plugin-level checks:**
+- [ ] Valid `plugin.json` with at least `name` field
+- [ ] Plugin name follows kebab-case pattern: `^[a-z][a-z0-9]*(-[a-z0-9]+)*$`
+- [ ] Description is 50-200 characters (informative but concise)
+- [ ] Version follows semantic versioning (MAJOR.MINOR.PATCH)
+
+**Skill-level checks:**
 - [ ] SKILL.md files have valid YAML frontmatter with `name` and `description`
 - [ ] No orphaned directories (skills without SKILL.md)
-- [ ] Description follows triggering best practices (starts with "Use when...")
+- [ ] Description follows triggering best practices (starts with "Use when..." or lists trigger phrases)
+- [ ] Body content uses imperative form (no second-person pronouns)
+- [ ] Reference files mentioned in SKILL.md actually exist
 
-## 5. Interactive Web Creator
+**Hook checks (if present):**
+- [ ] `hooks.json` has the outer `{"hooks": {...}}` wrapper
+- [ ] Event names are valid (PreToolUse, PostToolUse, etc.)
+- [ ] Hook commands use `${CLAUDE_PLUGIN_ROOT}` for portability
+
+## 5. Version Management
+
+Follow semantic versioning for all plugins:
+
+- **MAJOR** (1.0.0 -> 2.0.0): Breaking changes to skill triggers, removed commands, restructured plugin layout
+- **MINOR** (1.0.0 -> 1.1.0): New skills, commands, or hooks added; expanded reference material
+- **PATCH** (1.0.0 -> 1.0.1): Typo fixes, description tuning, minor content updates
+
+**Version bump workflow:**
+1. Update `version` in `.claude-plugin/plugin.json`
+2. Update the marketplace entry if the description or category changed
+3. For external plugins, update the `sha` in marketplace.json to pin the new version
+4. Commit with a message referencing the version: `plugin-name: v1.2.0 - added X skill`
+
+**Tracking versions across the marketplace:**
+- Each plugin manages its own version in `plugin.json`
+- The marketplace registry does not duplicate version numbers -- it references the plugin source
+- For pinned external plugins, the `sha` field serves as the version anchor
+
+## 6. Interactive Web Creator
 
 Open the visual skill/plugin creator in a browser:
 
@@ -220,11 +254,15 @@ The cyberpunk-themed web UI provides:
 - Automatic validation with quality scoring (A/B/F grades)
 - Copy-to-clipboard for generated output
 
-## Progressive Disclosure
+## Common Marketplace Patterns
 
-- For the complete marketplace.json schema: read `references/marketplace-schema.md`
-- For detailed plugin anatomy and all component specs: read `references/plugin-anatomy.md`
-- For the visual creator tool: open `assets/skill-creator-web.html`
+**Single-domain marketplace**: All plugins serve one technology stack (e.g., infrastructure tools). Keep categories broad (setup, monitoring, troubleshooting).
+
+**Multi-domain marketplace**: Plugins span different domains (dev tools, infra, AI). Use clear categories and ensure skill descriptions include enough trigger phrases to avoid cross-domain misfires.
+
+**Monorepo marketplace**: All plugins live in `plugins/` within the marketplace repo. Simplifies versioning and CI but increases repo size.
+
+**Hybrid marketplace**: First-party core plugins in `plugins/`, specialized or community plugins as external references. Balances control with extensibility.
 
 ## Common Mistakes
 
@@ -235,3 +273,12 @@ The cyberpunk-themed web UI provides:
 | SKILL.md has extra frontmatter fields | Only `name` and `description` are parsed |
 | hooks.json missing wrapper `{"hooks": {...}}` | Plugin hooks need the outer `hooks` key |
 | Marketplace source path wrong | Use `./plugins/name` for local, URL object for external |
+| Version not updated after changes | Always bump version in plugin.json on meaningful changes |
+| External plugin SHA not pinned | Pin to a commit SHA for reproducible installations |
+
+## Additional Resources
+
+- Complete marketplace.json schema: `references/marketplace-schema.md`
+- Detailed plugin anatomy and all component specs: `references/plugin-anatomy.md`
+- Visual creator tool: `assets/skill-creator-web.html`
+- Claude Code plugin documentation: https://docs.anthropic.com/en/docs/claude-code/plugins
