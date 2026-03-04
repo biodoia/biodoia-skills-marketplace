@@ -1,0 +1,28 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "INPUT=\"$CLAUDE_TOOL_INPUT\"; if echo \"$INPUT\" | grep -q 'marketplace.json'; then echo '⚠ ATTENZIONE: Modifica a marketplace.json — verificare schema e struttura dopo edit' >&2; fi",
+            "async": false
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "INPUT=\"$CLAUDE_TOOL_INPUT\"; FILE=$(echo \"$INPUT\" | grep -oP '\"file_path\"\\s*:\\s*\"\\K[^\"]+' 2>/dev/null); if [ -n \"$FILE\" ] && echo \"$FILE\" | grep -q 'SKILL.md$'; then if [ -f \"$FILE\" ]; then VIOLATIONS=$(grep -ciP '\\byou\\b|\\byour\\b|\\byou.re\\b|\\byourself\\b' \"$FILE\" 2>/dev/null || echo 0); if [ \"$VIOLATIONS\" -gt 0 ]; then echo \"STYLE: $VIOLATIONS possibili violazioni you/your in $FILE — verificare forma imperativa\" >&2; fi; WORDS=$(wc -w < \"$FILE\" 2>/dev/null || echo 0); if [ \"$WORDS\" -gt 3500 ]; then echo \"SIZE: $WORDS parole in $FILE — target 1500-2000, considerare spostamento in references/\" >&2; fi; fi; fi",
+            "async": true
+          }
+        ]
+      }
+    ]
+  }
+}
