@@ -55,6 +55,34 @@
       "category": "system-management",
       "source": "./plugins/manjaro-expert",
       "homepage": "https://github.com/biodoia/biodoia-skills-marketplace"
+    },
+    {
+      "name": "grpc-expert",
+      "description": "Expert gRPC and Protocol Buffers guide — proto3 syntax, service patterns, Go/Python implementation, buf, grpcurl, interceptors, streaming, and gRPC-Gateway",
+      "category": "protocols",
+      "source": "./plugins/grpc-expert",
+      "homepage": "https://github.com/biodoia/biodoia-skills-marketplace"
+    },
+    {
+      "name": "quic-expert",
+      "description": "QUIC protocol and HTTP/3 expert — quic-go, WebTransport, 0-RTT, connection migration, stream multiplexing, deployment, and protocol internals",
+      "category": "protocols",
+      "source": "./plugins/quic-expert",
+      "homepage": "https://github.com/biodoia/biodoia-skills-marketplace"
+    },
+    {
+      "name": "htmx-expert",
+      "description": "HTMX and Hypermedia-Driven Applications expert — core attributes, SSE, WebSocket, OOB swaps, Go/Python integration, patterns cookbook, and _hyperscript",
+      "category": "frontend",
+      "source": "./plugins/htmx-expert",
+      "homepage": "https://github.com/biodoia/biodoia-skills-marketplace"
+    },
+    {
+      "name": "retro-pixel-ui",
+      "description": "Retro gaming pixel art UI/UX design — cyberpunk neon, CRT effects, 8-bit/16-bit aesthetics, pixel fonts, RPG components, NES/SNES palettes, and CSS effects library",
+      "category": "design",
+      "source": "./plugins/retro-pixel-ui",
+      "homepage": "https://github.com/biodoia/biodoia-skills-marketplace"
     }
   ]
 }
