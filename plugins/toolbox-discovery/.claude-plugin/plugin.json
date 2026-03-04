@@ -1,0 +1,23 @@
+{
+  "name": "toolbox-discovery",
+  "description": "Discover all installed tools on the system, identify misconfigured or underutilized capabilities, activate dormant features, optimize the development environment, and recommend missing tools for any project stack",
+  "version": "0.1.0",
+  "author": {
+    "name": "biodoia",
+    "email": "biodoia@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/biodoia/biodoia-skills-marketplace",
+  "repository": "https://github.com/biodoia/biodoia-skills-marketplace",
+  "license": "MIT",
+  "keywords": [
+    "tools",
+    "discovery",
+    "system",
+    "inventory",
+    "configuration",
+    "setup",
+    "automation",
+    "cli",
+    "runtime"
+  ]
+}
