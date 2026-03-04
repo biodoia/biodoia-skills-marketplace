@@ -1,0 +1,22 @@
+{
+  "name": "wayland-multimonitor",
+  "description": "Comprehensive Wayland multi-monitor setup and management expert — compositor configuration, resolution, scaling, positioning, hotplugging, gaming, screen sharing, and troubleshooting for Hyprland, Sway, KDE, and GNOME",
+  "version": "0.1.0",
+  "author": {
+    "name": "biodoia",
+    "email": "biodoia@users.noreply.github.com"
+  },
+  "repository": "https://github.com/biodoia/biodoia-skills-marketplace",
+  "license": "MIT",
+  "keywords": [
+    "wayland",
+    "multimonitor",
+    "display",
+    "compositor",
+    "hyprland",
+    "sway",
+    "kde",
+    "gnome",
+    "screen"
+  ]
+}
