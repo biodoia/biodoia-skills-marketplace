@@ -1,6 +1,6 @@
 ---
 name: quic-expert
-description: Use when needing help with QUIC protocol, HTTP/3, quic-go, connection migration, 0-RTT, stream multiplexing, or implementing QUIC-based services. Also use when mentioning 'quic', 'http3', 'quic-go', 'h3', 'webtransport', 'msquic', 'ngtcp2', or QUIC troubleshooting.
+description: This skill should be used when the user asks about "QUIC", "HTTP/3", "quic-go", "h3", "WebTransport", "msquic", "ngtcp2", "0-RTT", "connection migration", or "QPACK". Make sure to use this skill whenever the user mentions the QUIC protocol, HTTP/3 deployment, stream multiplexing over UDP, quic-go implementation, WebTransport, QUIC-based services, or troubleshooting QUIC connections, even if they just mention UDP-based transport or low-latency networking without explicitly saying QUIC.
 ---
 
 # QUIC Protocol Expert
@@ -215,43 +215,17 @@ For detailed code examples, see `references/quic-go-guide.md`.
 
 ## Other Implementations
 
-### Rust
-
-- **quinn** (`quinn-rs/quinn`): Pure Rust, async/await, built on rustls. Most popular Rust QUIC library. `cargo add quinn`
-- **s2n-quic** (`aws/s2n-quic`): AWS-backed, performance-focused, uses s2n-tls. `cargo add s2n-quic`
-- **quiche** (`cloudflare/quiche`): Cloudflare's implementation in Rust with C API. Powers Cloudflare's edge. `cargo add quiche`
-
-### C/C++
-
-- **msquic** (Microsoft): Cross-platform, high-performance. Used in Windows, .NET, and Xbox. Install: `apt install libmsquic` or build from source.
-- **ngtcp2**: Lightweight C library, often paired with nghttp3 for HTTP/3. Used by curl.
-- **lsquic** (LiteSpeed): Powers LiteSpeed web server and OpenLiteSpeed.
-- **picoquic**: Minimal C implementation by Christian Huitema (QUIC co-author), great for testing and experimentation.
-
-### Python
-
-- **aioquic** (`aiortc/aioquic`): Async QUIC implementation for Python. `pip install aioquic`. Supports HTTP/3 and WebTransport.
-
-### Node.js
-
-- Built-in `node:quic` module (experimental, behind `--experimental-quic` flag).
-- Third-party: `@aspect-build/quic` and `webtransport` npm packages.
-
-### curl
-
-```bash
-curl --http3-only https://example.com    # Force HTTP/3
-curl --http3 https://example.com         # Try HTTP/3, fall back to HTTP/2 or 1.1
-curl -I --http3 https://cloudflare.com   # Check HTTP/3 headers
-```
-
-Requires curl built with nghttp3+ngtcp2 or quiche backend. Check: `curl --version | grep HTTP3`.
+- **Rust**: quinn (pure Rust, async/await, rustls), s2n-quic (AWS, s2n-tls), quiche (Cloudflare, C API)
+- **C/C++**: msquic (Microsoft, cross-platform), ngtcp2 (lightweight, used by curl), lsquic (LiteSpeed), picoquic (minimal, for testing)
+- **Python**: aioquic (async, HTTP/3 + WebTransport) -- `pip install aioquic`
+- **Node.js**: Built-in `node:quic` (experimental, `--experimental-quic` flag)
+- **curl**: `curl --http3-only https://example.com` (requires nghttp3+ngtcp2 or quiche backend; check with `curl --version | grep HTTP3`)
 
 ---
 
 ## WebTransport
 
-WebTransport is a web API that provides low-latency, bidirectional communication between a client (browser) and server over HTTP/3 and QUIC. It supports both reliable streams and unreliable datagrams.
+WebTransport provides low-latency, bidirectional browser-to-server communication over HTTP/3 and QUIC, supporting both reliable streams and unreliable datagrams.
 
 ### Browser API
 
@@ -277,10 +251,10 @@ Real-time multiplayer gaming, live video/audio streaming, IoT telemetry, collabo
 
 ## QUIC-based Protocols
 
-- **DNS over QUIC (DoQ, RFC 9250)**: Encrypted DNS queries over QUIC. Lower latency than DoH (HTTP/3) for DNS-specific traffic.
-- **MASQUE (RFC 9298, 9484)**: Proxying UDP traffic over QUIC. Enables VPN-like tunneling and IP proxying through QUIC connections.
-- **Media over QUIC (MoQ)**: IETF draft standard for live media streaming. Uses QUIC datagrams and streams for adaptive, low-latency media delivery.
-- **QUIC Datagrams (RFC 9221)**: Unreliable data transmission within a QUIC connection. Useful for real-time data where retransmission is unnecessary (game state, voice frames).
+- **DNS over QUIC (DoQ, RFC 9250)**: Encrypted DNS queries with lower latency than DoH.
+- **MASQUE (RFC 9298, 9484)**: UDP proxying over QUIC for VPN-like tunneling.
+- **Media over QUIC (MoQ)**: IETF draft for adaptive, low-latency live media streaming.
+- **QUIC Datagrams (RFC 9221)**: Unreliable transmission within a QUIC connection for real-time data (game state, voice frames).
 
 ---
 
@@ -309,19 +283,13 @@ Real-time multiplayer gaming, live video/audio streaming, IoT telemetry, collabo
 - **HAProxy**: QUIC support added in 2.6+ (experimental). Configuration: `bind quic4@:443 ssl crt /path/cert.pem alpn h3`.
 - **Envoy**: HTTP/3 upstream and downstream support.
 
-### CDN Support
+### CDN and Firewall
 
-Cloudflare, Akamai, Fastly, AWS CloudFront, and Google Cloud CDN all support HTTP/3 on their edge networks.
-
-### Firewall Considerations
-
-- QUIC uses **UDP port 443** (by convention). Firewalls must allow UDP 443 inbound/outbound.
-- Many corporate firewalls block non-TCP traffic -- this is the primary deployment obstacle for QUIC.
-- NAT traversal: QUIC handles NAT rebinding via Connection IDs, but aggressive NAT timeout (< 30s) can still disrupt connections. Use keep-alive to maintain NAT bindings.
+Major CDNs (Cloudflare, Akamai, Fastly, AWS CloudFront, Google Cloud CDN) support HTTP/3. QUIC uses **UDP port 443** -- firewalls must allow UDP 443 inbound/outbound. Many corporate firewalls block non-TCP traffic, which is the primary deployment obstacle. Use keep-alive to maintain NAT bindings against aggressive NAT timeouts (< 30s).
 
 ### Mobile Deployment
 
-Connection migration makes QUIC ideal for mobile: seamless handoff between Wi-Fi and cellular without reconnecting. Google reports significant latency improvements for YouTube and Google Search on mobile via QUIC.
+Connection migration makes QUIC ideal for mobile: seamless handoff between Wi-Fi and cellular without reconnecting.
 
 ---
 
@@ -345,7 +313,7 @@ Wireshark has a built-in QUIC dissector. To decrypt QUIC traffic:
 
 ```bash
 export SSLKEYLOGFILE=/tmp/quic-keys.log
-# Run your QUIC client/server
+# Run the QUIC client/server
 # Open capture in Wireshark: Edit > Preferences > Protocols > TLS > (Pre)-Master-Secret log filename
 ```
 
@@ -376,17 +344,17 @@ Key metrics to monitor: congestion window (cwnd), smoothed RTT (srtt), packet lo
 
 ## Security
 
-- **Built-in encryption**: All QUIC packets (except the header type bits and Connection ID) are encrypted with TLS 1.3. There is no plaintext mode.
-- **Amplification attack protection**: Servers must not send more than 3x the data received from an unvalidated address. Address validation tokens (in Retry packets or NEW_TOKEN frames) lift this limit.
-- **Retry packets**: Servers under load can require clients to prove their address by responding to a Retry packet with a valid token -- an anti-DDoS mechanism.
-- **Connection migration security**: Path validation via PATH_CHALLENGE/PATH_RESPONSE prevents off-path attackers from hijacking connections.
-- **Version negotiation**: If the server does not support the client's QUIC version, it responds with a Version Negotiation packet listing supported versions.
-- **Header protection**: QUIC encrypts packet numbers and other header fields to prevent ossification and tracking.
+- **Built-in encryption**: All QUIC packets (except header type bits and Connection ID) are encrypted with TLS 1.3. No plaintext mode exists.
+- **Amplification protection**: Servers limit responses to 3x data received from unvalidated addresses. Retry packets and NEW_TOKEN frames lift this limit.
+- **Connection migration security**: PATH_CHALLENGE/PATH_RESPONSE prevents off-path connection hijacking.
+- **Version negotiation**: Unsupported QUIC versions trigger a Version Negotiation packet listing supported versions.
+- **Header protection**: Packet numbers and header fields are encrypted to prevent ossification and tracking.
 
 ---
 
-## Progressive Disclosure
+## Additional Resources
 
-- Practical quic-go code examples: `references/quic-go-guide.md`
-- Deep protocol internals (packets, frames, state machine, RFCs): `references/protocol-deep-dive.md`
-- Quick QUIC/HTTP3 reference: `/quic-help` command
+Consult these reference files for deeper coverage beyond this skill's body:
+
+- **`references/quic-go-guide.md`** -- Practical quic-go code examples: TLS certificate setup, server/client patterns, HTTP/3 integration, WebTransport, 0-RTT implementation, connection migration, and advanced transport configuration. Consult when building or debugging Go-based QUIC services.
+- **`references/protocol-deep-dive.md`** -- QUIC protocol internals: packet formats (Initial, Handshake, 0-RTT, 1-RTT), frame types, connection state machine, loss detection algorithms, congestion control (NewReno, CUBIC, BBR), and full RFC coverage (9000, 9001, 9002, 9114, 9204, 9221). Consult when diagnosing wire-level issues or implementing custom QUIC behavior.

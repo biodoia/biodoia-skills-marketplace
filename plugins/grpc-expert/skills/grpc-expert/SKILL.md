@@ -1,6 +1,6 @@
 ---
 name: grpc-expert
-description: Use when needing help with gRPC services, Protocol Buffers, protoc compilation, service definitions, streaming patterns, interceptors, load balancing, or troubleshooting gRPC connections. Also use when mentioning 'grpc', 'protobuf', 'proto file', 'grpc-go', 'grpc streaming', 'buf', 'connect-go', 'tonic', or 'grpcurl'.
+description: This skill should be used when the user asks about "gRPC", "protobuf", "Protocol Buffers", "proto file", "protoc", "grpc-go", "grpc streaming", "buf", "connect-go", "tonic", "grpcurl", or "evans". Make sure to use this skill whenever the user mentions gRPC services, service definitions, streaming patterns, interceptors, metadata, load balancing, gRPC-Gateway, or troubleshooting gRPC connections, even if they only mention RPC or binary serialization without explicitly saying gRPC.
 ---
 
 # gRPC Expert
@@ -651,3 +651,10 @@ GRPC_GO_LOG_VERBOSITY_LEVEL=2 ./myserver
 - nginx needs `grpc_pass` directive (not `proxy_pass`).
 - If behind a proxy that terminates TLS, ensure it speaks HTTP/2 to the backend.
 - CloudFlare and some CDNs may buffer streaming responses; use gRPC-specific endpoints.
+
+## Additional Resources
+
+Consult these reference files for deeper coverage beyond this skill's body:
+
+- **`references/grpc-patterns.md`** -- Production-grade gRPC implementation patterns: resource-oriented API design (Google AIP), pagination, long-running operations, streaming best practices, interceptor chains, testing strategies, and deployment configurations. Consult when designing new gRPC services or refactoring existing ones toward best-practice architectures.
+- **`references/protobuf-cheatsheet.md`** -- Complete proto3 syntax reference with examples for every scalar type, well-known type, option, nested message, enum, oneof, map, and import pattern. Consult when writing or reviewing `.proto` files and needing exact syntax or field-numbering guidance.
