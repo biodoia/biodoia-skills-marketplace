@@ -1,6 +1,6 @@
 ---
 name: xen-orchestra-expert
-description: Use when managing Xen Orchestra (XO), XCP-ng hypervisors, creating/managing VMs, configuring backups, using xo-cli, or automating infrastructure with Xen Orchestra REST API. Also use when the user mentions "xen orchestra", "XO", "XCP-ng", "xo-cli", "VM management", "xo-server", "xo-web", or virtualization with Xen.
+description: This skill should be used when the user asks about "Xen Orchestra", "XO", "XCP-ng", "xo-cli", "xo-server", "xo-web", "XOA", "VM management", or "XenServer". Make sure to use this skill whenever the user wants to manage Xen Orchestra, create or manage VMs on XCP-ng, configure backups, use xo-cli, automate infrastructure with the XO REST API, manage storage repositories, configure networking, or troubleshoot XCP-ng pools, even if they just mention virtualization or hypervisor management without explicitly saying Xen.
 ---
 
 # Xen Orchestra Expert
@@ -75,7 +75,7 @@ Install globally:
 npm install -g xo-cli
 ```
 
-Register against your XO server:
+Register against the XO server:
 
 ```bash
 xo-cli --register https://xo.example.com admin@admin.net password
@@ -189,7 +189,7 @@ Replicates VMs from one pool to another in near-real-time using delta snapshots.
 
 ### Disaster Recovery (DR)
 
-Similar to CR but explicitly designed for failover. Configure in XO Web UI under Backup > Disaster Recovery. Set RPO (recovery point objective) to match your schedule interval.
+Explicitly designed for failover. Configure in XO Web UI under Backup > Disaster Recovery. Set RPO (recovery point objective) to match the desired schedule interval.
 
 ### Backup Remotes
 
@@ -202,6 +202,14 @@ curl -X POST https://xo.example.com/rest/v0/remotes \
   -H "Content-Type: application/json" \
   -d '{"name":"nas-backup","url":"nfs://192.168.1.100//backups/xo"}'
 ```
+
+### Backup Best Practices
+
+- Schedule full backups weekly, delta backups daily for optimal storage and recovery balance
+- Test restore procedures regularly -- create a restore verification job on a test pool
+- Use separate SRs for backup staging to avoid performance impact on production VMs
+- Set retention policies to auto-delete old backup points and prevent storage exhaustion
+- For critical VMs, combine CR (low RPO) with full backups (guaranteed self-contained restore)
 
 ## Storage Management
 
@@ -297,7 +305,7 @@ XO exposes a REST API at `https://xo.example.com/rest/v0/`.
 # Get token (store and reuse)
 curl -X POST https://xo.example.com/rest/v0/sessions \
   -H "Content-Type: application/json" \
-  -d '{"email":"admin@admin.net","password":"yourpassword"}'
+  -d '{"email":"admin@admin.net","password":"admin-password"}'
 # Response: {"token": "..."}
 
 # Use token in all subsequent requests
@@ -400,3 +408,11 @@ Enable VT-d/IOMMU in host BIOS. Then in XO Web UI: Host > PCI Devices > assign t
 ```bash
 xe vm-param-set uuid=<vm-uuid> other-config:pci=0/0000:01:00.0
 ```
+
+## Additional Resources
+
+- Complete xo-cli command reference: `references/xo-cli-reference.md`
+- REST API endpoint documentation: `references/xo-api-reference.md`
+- Official XO documentation: https://xen-orchestra.com/docs/
+- XCP-ng documentation: https://docs.xcp-ng.org/
+- Vates community forum: https://xcp-ng.org/forum/
