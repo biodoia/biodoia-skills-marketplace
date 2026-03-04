@@ -1,6 +1,6 @@
 ---
 name: cli-ai-tools
-description: Use when the user needs help with CLI-based AI coding assistants, their commands, flags, configuration, model selection, comparison, installation, or troubleshooting. Also use when the user mentions Claude Code, Codex CLI, Gemini CLI, Aider, Goose, amp, OpenCode, Cody CLI, Copilot CLI, qodo, Jules, Continue, avante, Cline, Roo Code, Cursor CLI, Windsurf, or Trae, or asks about AI coding tools in the terminal.
+description: This skill should be used when the user asks about "CLI AI tools", "Claude Code", "Codex CLI", "Gemini CLI", "Aider", "Goose", "amp", "OpenCode", "Cody CLI", "Copilot CLI", "qodo", "Jules", "Continue", "avante", "Cline", "Roo Code", "Cursor", "Windsurf", or "Trae". Make sure to use this skill whenever the user mentions any AI coding assistant, asks about terminal-based AI tools, wants to compare CLI agents, needs help with commands, flags, configuration, model selection, installation, or troubleshooting of any AI coding tool, even if they don't name a specific tool.
 ---
 
 # CLI AI Coding Tools Reference
@@ -29,7 +29,7 @@ Comprehensive reference for all major command-line AI coding assistants. This co
 
 ## Anthropic: Claude Code
 
-The CLI agent you are running inside right now. Agentic AI coding with deep codebase understanding, tool use, and MCP integration.
+The CLI agent currently running in this session. Agentic AI coding with deep codebase understanding, tool use, and MCP integration.
 
 **Install:**
 ```bash
@@ -173,7 +173,7 @@ GEMINI_MODEL=gemini-2.5-pro        # Default model
 
 ## Google: Jules
 
-Google's asynchronous coding agent. Integrates with GitHub — you assign issues and Jules works on them in the background, creating PRs.
+Google's asynchronous coding agent. Integrates with GitHub — tasks are assigned via issues and Jules works on them in the background, creating PRs.
 
 **Usage:**
 - Accessed via [jules.google.com](https://jules.google.com) or GitHub integration
@@ -182,7 +182,7 @@ Google's asynchronous coding agent. Integrates with GitHub — you assign issues
 - Jules creates branches, makes changes, submits PRs
 
 **Key features:**
-- Async operation (works while you do other things)
+- Async operation (runs independently in the background)
 - GitHub-native integration
 - Multi-file changes with PR creation
 - Powered by Gemini models
@@ -236,28 +236,17 @@ aider --architect                   # architect mode (plan then edit)
 | `--model <model>` | Main model for editing |
 | `--architect` | Use architect mode (separate planning model) |
 | `--editor-model <model>` | Model for code edits (in architect mode) |
-| `--auto-commits` | Auto-commit after each change (default: on) |
-| `--no-auto-commits` | Disable auto-commits |
+| `--auto-commits` / `--no-auto-commits` | Toggle auto-commit after each change |
 | `--watch-files` | Watch files for changes and auto-add |
-| `--dark-mode` | Dark terminal theme |
 | `--no-git` | Disable git integration |
 | `--yes` | Auto-confirm prompts |
-| `--map-tokens <n>` | Tokens for repo map (0 to disable) |
 | `--edit-format <fmt>` | `whole`, `diff`, `udiff`, `diff-fenced` |
 
 **Configuration:**
 - Config file: `.aider.conf.yml` (project root or `~/.aider.conf.yml`)
 - Environment: `.env` file in project root
 - Model aliases: `.aider.model.settings.yml`
-
-**Environment variables:**
-```bash
-ANTHROPIC_API_KEY=sk-ant-...        # For Claude models
-OPENAI_API_KEY=sk-...               # For OpenAI models
-GEMINI_API_KEY=...                  # For Gemini models
-OPENROUTER_API_KEY=...              # For OpenRouter
-AIDER_MODEL=claude-3.5-sonnet      # Default model
-```
+- Environment variables: `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, `GEMINI_API_KEY`, `OPENROUTER_API_KEY`, `AIDER_MODEL`
 
 ---
 
@@ -452,22 +441,15 @@ Add to Neovim plugin manager (lazy.nvim, packer, etc.):
 
 ## Other CLI-Adjacent Tools
 
-### Cline / Roo Code
-Primarily VS Code extensions. Cline has been forked as Roo Code. No standalone CLI binary, but operates through VS Code's terminal integration. Can be used via the VS Code CLI `code` command with extensions.
+The following are primarily IDE-based, not standalone CLI agents:
 
-### Cursor CLI
-Cursor is an IDE (VS Code fork). No standalone CLI agent, but Cursor settings can be accessed via the `cursor` command to open the editor from terminal.
-
-### Windsurf
-Windsurf (by Codeium) is an IDE. No standalone CLI agent. Use the `windsurf` command to open the editor from terminal.
-
-### Trae
-Trae (by ByteDance) is an IDE. No standalone CLI agent. Has a `trae` command to open the editor.
-
-### Continue
-Continue is primarily a VS Code / JetBrains extension. Offers a local server mode and config-based setup, but no dedicated CLI agent binary.
-- Config: `~/.continue/config.json`
-- Supports: All major model providers
+| Tool | Type | Notes |
+|------|------|-------|
+| **Cline / Roo Code** | VS Code extension | Cline forked as Roo Code. No standalone CLI binary. |
+| **Cursor** | IDE (VS Code fork) | Open from terminal with `cursor` command. |
+| **Windsurf** | IDE (Codeium) | Open from terminal with `windsurf` command. |
+| **Trae** | IDE (ByteDance) | Open from terminal with `trae` command. |
+| **Continue** | VS Code / JetBrains plugin | Config: `~/.continue/config.json`. Supports all major providers. |
 
 ---
 
@@ -485,7 +467,7 @@ Continue is primarily a VS Code / JetBrains extension. Offers a local server mod
 
 ---
 
-## Progressive Disclosure
+## Additional Resources
 
-- For a detailed feature comparison table: read `references/tools-comparison.md`
-- For common patterns across all CLI AI tools: read `references/common-patterns.md`
+- **`references/tools-comparison.md`** — Detailed side-by-side feature comparison table across all CLI AI coding tools, covering capabilities, model support, pricing, and platform availability.
+- **`references/common-patterns.md`** — Common usage patterns shared across CLI AI tools: context management, multi-file editing, git integration, MCP server configuration, and model routing strategies.

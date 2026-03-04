@@ -1,11 +1,11 @@
 ---
 name: sdd-steroids
-description: "Use when starting any non-trivial development task, feature implementation, or project architecture decision — especially when wanting cutting-edge practices. This skill enriches Specification-Driven Development with real-time research of emerging best practices from tech news, agentic coding patterns, and community insights before writing any spec or code. Also use when mentioning 'SDD', 'specification driven', 'research before coding', 'latest best practices', 'agentic development', 'cutting edge patterns', or wanting to ensure development follows the most current industry practices."
+description: This skill should be used when the user asks about "SDD", "specification driven development", "research before coding", "latest best practices", "agentic development", "cutting edge patterns", "RECON phase", or "spec-driven". Make sure to use this skill whenever the user starts any non-trivial development task, feature implementation, or architecture decision and wants cutting-edge practices, needs real-time research of emerging best practices before writing specs or code, or wants to ensure development follows the most current industry practices with structured RECON intelligence gathering, even if they just say they want to build something properly.
 ---
 
 # SDD on Steroids: Specification-Driven Development with Real-Time Intelligence
 
-> **Research before you spec, spec before you code, verify before you ship.**
+> **Research before the spec, spec before the code, verify before shipping.**
 
 ## Philosophy
 
@@ -80,46 +80,13 @@ Score each finding along these axes:
 | **Direct relevance** | HIGH / MEDIUM / LOW | Does this finding directly affect the task's architecture, implementation, or technology choices? |
 | **Maturity** | Bleeding edge / Early adopter / Mainstream | How battle-tested is this? Bleeding edge = interesting but risky. Mainstream = safe but maybe not news. |
 | **Community validation** | Stars, upvotes, adoption numbers | Is the community actually using this, or is it hype? |
-| **Risk assessment** | Proven in production / Experimental / Unproven | Would you bet your production system on this? |
+| **Risk assessment** | Proven in production / Experimental / Unproven | Is this production-ready? |
 
 Filter aggressively. Only HIGH and MEDIUM relevance findings make it into the intelligence brief. LOW relevance findings are logged but not acted on.
 
 #### Step 4: Intelligence Brief
 
-Produce a structured RECON brief (see `references/spec-templates.md` for the full template):
-
-```
-RECON BRIEF: [task/project name]
-Date: [today]
-Sources consulted: [list of sources searched]
-Search queries used: [list of queries]
-
-EMERGING PRACTICES (directly relevant):
-  - [finding]: [source] [maturity] [recommendation]
-  - [finding]: [source] [maturity] [recommendation]
-
-NEW TOOLS/LIBRARIES:
-  - [tool]: [what it solves] [stars/adoption] [recommend: adopt/evaluate/watch]
-  - [tool]: [what it solves] [stars/adoption] [recommend: adopt/evaluate/watch]
-
-ANTI-PATTERNS TO AVOID:
-  - [pattern]: [why it's bad] [source]
-  - [pattern]: [why it's bad] [source]
-
-SECURITY ADVISORIES:
-  - [advisory]: [impact] [action required]
-
-CONFIDENCE: [HIGH/MEDIUM/LOW]
-  HIGH = multiple corroborating sources, production-validated findings
-  MEDIUM = some corroboration, mostly early-adopter stage
-  LOW = limited sources, bleeding edge, take with caution
-
-ACTION SUMMARY:
-  ADOPT: [findings ready for immediate use]
-  EVALUATE: [findings worth prototyping/testing]
-  WATCH: [findings to monitor but not act on yet]
-  IGNORE: [findings not relevant enough]
-```
+Produce a structured RECON brief using the template in `references/spec-templates.md` (Section 1: RECON Brief Template). The brief must include: sources consulted, emerging practices with maturity ratings, new tools/libraries with adopt/evaluate/watch recommendations, anti-patterns to avoid, security advisories, a confidence level (HIGH/MEDIUM/LOW), and an action summary.
 
 Present the RECON brief to the user before proceeding. The user may redirect, add context, or override recommendations.
 
@@ -129,52 +96,7 @@ Present the RECON brief to the user before proceeding. The user may redirect, ad
 
 Write the specification INFORMED by the RECON brief. This is not a generic spec — every section should reference specific findings that influenced the decisions.
 
-Use the specification template from `references/spec-templates.md`. The key sections:
-
-```markdown
-# Specification: [feature/project name]
-
-## Context & RECON Findings
-[Summary of the intelligence brief. What did we learn? What are we adopting, evaluating, or ignoring?]
-
-## Requirements
-### Functional Requirements
-[What the system must do]
-
-### Non-Functional Requirements
-[Performance, scalability, security, maintainability targets — informed by RECON production insights]
-
-## Architecture Decision Records (ADRs)
-[Each significant decision documented with:
-  - Decision
-  - Context (including RECON evidence)
-  - Alternatives considered
-  - Consequences
-  - Status: Accepted/Proposed/Superseded]
-
-## Technology Stack
-[Every technology choice justified with evidence from RECON.
-  - Why this library over alternatives?
-  - What did the research say about maturity?
-  - What are the known risks?]
-
-## API/Interface Design
-[Contracts, schemas, protocols, endpoint definitions]
-
-## Test Strategy
-[Informed by latest testing practices from RECON.
-  - Unit testing approach
-  - Integration testing
-  - E2E strategy
-  - Performance benchmarks
-  - Security testing]
-
-## Security Considerations
-[Directly from RECON advisories + standard threat modeling]
-
-## Implementation Plan
-[Ordered phases with dependencies, estimated effort, checkpoint criteria]
-```
+Use the Feature Specification Template from `references/spec-templates.md` (Section 2). The specification must include these key sections: Context & RECON Findings, Functional and Non-Functional Requirements, Architecture Decision Records (ADRs) with RECON evidence, Technology Stack with justified choices, API/Interface Design, Test Strategy informed by RECON, Security Considerations, and an Implementation Plan with phased delivery.
 
 Flag explicitly where emerging practices differ from established ones. If the RECON found a new approach that contradicts conventional wisdom, document both the old way and the new way, with evidence for why the spec chooses what it chooses.
 
@@ -270,20 +192,20 @@ When the task involves AI-assisted development, the RECON phase should pay speci
 
 See `references/agentic-patterns.md` for comprehensive coverage of these patterns.
 
-## Progressive Disclosure
+## Additional Resources
 
-- For detailed source-by-source research guidance: read `references/recon-sources.md`
-- For ready-to-use specification and brief templates: read `references/spec-templates.md`
-- For agentic coding patterns and AI-assisted development: read `references/agentic-patterns.md`
+- **`references/recon-sources.md`** — Detailed source-by-source research guidance with search strategies, API endpoints, and query templates for each intelligence source (Hacker News, GitHub Trending, Reddit, etc.).
+- **`references/spec-templates.md`** — Ready-to-use templates for the RECON Brief, Feature Specification, API Design Specification, Architecture Decision Records, Retrospective, and Technology Evaluation Matrix.
+- **`references/agentic-patterns.md`** — Comprehensive coverage of agentic coding patterns: multi-agent orchestration, dispatcher/specialist/reviewer architectures, verification loops, context management, and cost optimization strategies.
 
 ## Anti-Patterns in SDD
 
 | Anti-Pattern | Why It Fails | What to Do Instead |
 |-------------|-------------|-------------------|
-| Skipping RECON because "I already know this" | Static knowledge degrades. The industry moves fast. | Always run RECON, even for familiar domains. You'll be surprised. |
+| Skipping RECON because "I already know this" | Static knowledge degrades. The industry moves fast. | Always run RECON, even for familiar domains. Unexpected findings are common. |
 | Writing vague specs ("make it fast") | Unverifiable requirements lead to endless debate | Quantify: "P99 latency under 200ms at 1000 RPS" |
 | Spec becomes shelfware | Nobody reads a 50-page doc | Keep specs actionable, reference them during BUILD |
 | Ad-hoc fixes during BUILD | Undermines the entire spec-driven approach | Return to Phase 1 if the spec is wrong |
 | Skipping VALIDATE | "It compiles, ship it" | VERIFY catches integration issues, security gaps, spec drift |
-| RECON paralysis | Researching forever, never starting | Time-box RECON to 15-30 minutes. Capture what you found, move on. |
+| RECON paralysis | Researching forever, never starting | Time-box RECON to 15-30 minutes. Capture findings and move on. |
 | Adopting bleeding-edge without evaluation | Latest != greatest. Production readiness matters. | Use the maturity/risk scoring. Default to EVALUATE, not ADOPT. |
