@@ -1,37 +1,35 @@
 ---
 name: tmux-expert
-description: Use when the user needs help with tmux sessions, windows, panes, configuration, scripting, or troubleshooting. Also use when someone mentions "tmux", "terminal multiplexer", "screen session", "detach", "attach", "tmux.conf", "tmux plugins", "tpm", "tmuxinator", "tmuxp", pane splitting, window management in the terminal, or persistent terminal sessions over SSH.
+description: This skill should be used when the user asks about "tmux", "terminal multiplexer", "tmux.conf", "tmux plugins", "tpm", "tmuxinator", "tmuxp", "detach", "attach", or "pane splitting". Make sure to use this skill whenever the user needs help with tmux sessions, windows, panes, configuration, scripting, keybindings, copy mode, status bar customization, or troubleshooting, even if they just mention persistent terminal sessions, window management in the terminal, or surviving SSH disconnections without explicitly saying tmux.
 ---
 
 # tmux Expert
 
-tmux (terminal multiplexer) lets you run multiple terminal sessions inside a single window, detach them from the controlling terminal, and reattach later. Sessions survive disconnections, making tmux essential for remote work, long-running processes, and complex development workflows.
+tmux (terminal multiplexer) runs multiple terminal sessions inside a single window, detaches them from the controlling terminal, and reattaches later. Sessions survive disconnections, making tmux essential for remote work, long-running processes, and complex development workflows.
 
 ## Core Concepts
 
 ### Server / Client Model
 
-tmux operates as a client-server system. The **server** holds all sessions in memory and runs in the background. Each terminal that connects is a **client**. When you detach, the client disconnects but the server (and all sessions) keeps running. The server starts automatically on your first tmux command and exits when the last session is destroyed.
+tmux operates as a client-server system. The **server** holds all sessions in memory and runs in the background. Each terminal that connects is a **client**. On detach, the client disconnects but the server (and all sessions) keeps running. The server starts automatically on the first tmux command and exits when the last session is destroyed.
 
-The server socket lives at `/tmp/tmux-$UID/default` by default. You can run multiple servers with `tmux -L <socket-name>` for complete isolation.
+The server socket lives at `/tmp/tmux-$UID/default` by default. Run multiple servers with `tmux -L <socket-name>` for complete isolation.
 
 ### Sessions, Windows, Panes
 
 tmux has a three-level hierarchy:
 
-- **Session**: A named collection of windows. Sessions are the top-level unit you attach/detach from. Each session has one active window.
-- **Window**: A single full-screen view within a session. Windows are like tabs. Each window has one or more panes.
+- **Session**: A named collection of windows. Sessions are the top-level unit for attach/detach. Each session has one active window.
+- **Window**: A single full-screen view within a session, similar to tabs. Each window has one or more panes.
 - **Pane**: A rectangular subdivision of a window. Each pane runs its own shell (or any process). Panes share the window space via splits.
 
 Typical usage: one session per project, multiple windows per task area (editor, server, logs), panes for side-by-side views.
 
 ### The Prefix Key
 
-tmux keybindings start with a **prefix** key combination. The default prefix is `C-b` (Ctrl+b). You press the prefix, release it, then press the action key. For example, `C-b c` creates a new window: press Ctrl+b, release, press c.
+tmux keybindings start with a **prefix** key combination. The default prefix is `C-b` (Ctrl+b). Press the prefix, release it, then press the action key. For example, `C-b c` creates a new window: press Ctrl+b, release, press c.
 
-Popular rebindings:
-- `C-a` (like GNU screen, closer to home row)
-- `C-Space` (easy to reach, no conflict with readline)
+Popular rebindings include `C-a` (like GNU screen, closer to home row) and `C-Space` (easy to reach, no conflict with readline).
 
 Rebind in `.tmux.conf`:
 ```
@@ -40,84 +38,9 @@ set -g prefix C-a
 bind C-a send-prefix
 ```
 
-The `send-prefix` binding lets you send the prefix key itself to programs inside tmux (press prefix twice).
+The `send-prefix` binding sends the prefix key itself to programs inside tmux (press prefix twice).
 
-## Essential Keybindings
-
-All keybindings below assume the default `C-b` prefix. Press the prefix first, then the listed key.
-
-### Session Management
-
-| Key | Action |
-|-----|--------|
-| `d` | Detach from current session |
-| `s` | List sessions (interactive chooser) |
-| `$` | Rename current session |
-| `(` | Switch to previous session |
-| `)` | Switch to next session |
-| `:new-session` | Create a new session from command prompt |
-
-### Window Management
-
-| Key | Action |
-|-----|--------|
-| `c` | Create new window |
-| `n` | Next window |
-| `p` | Previous window |
-| `0-9` | Jump to window by number |
-| `w` | List all windows (interactive chooser) |
-| `,` | Rename current window |
-| `&` | Kill current window (with confirmation) |
-| `.` | Move window to a different index |
-| `l` | Toggle to last active window |
-| `f` | Find window by name |
-
-### Pane Management
-
-| Key | Action |
-|-----|--------|
-| `%` | Split pane vertically (left/right) |
-| `"` | Split pane horizontally (top/bottom) |
-| `arrow keys` | Navigate between panes |
-| `o` | Cycle to next pane |
-| `;` | Toggle to last active pane |
-| `z` | Zoom/unzoom current pane (fullscreen toggle) |
-| `x` | Kill current pane (with confirmation) |
-| `{` | Swap pane with previous |
-| `}` | Swap pane with next |
-| `!` | Break pane into its own window |
-| `q` | Display pane numbers (type number to jump) |
-| `Space` | Cycle through pane layouts |
-| `C-arrow keys` | Resize pane in small increments |
-| `M-arrow keys` | Resize pane in large increments |
-
-### Copy Mode
-
-| Key | Action |
-|-----|--------|
-| `[` | Enter copy mode (scrollback) |
-| `]` | Paste from tmux buffer |
-| `=` | List all paste buffers and choose |
-
-In copy mode with vi keys (`setw -g mode-keys vi`):
-- `/` or `?` to search forward/backward
-- `v` to begin selection, `y` to yank
-- `q` or `Enter` to exit copy mode
-
-In copy mode with emacs keys (default):
-- `C-s` or `C-r` to search forward/backward
-- `C-Space` to begin selection, `M-w` to copy
-- `q` to exit copy mode
-
-### Miscellaneous
-
-| Key | Action |
-|-----|--------|
-| `:` | Open command prompt |
-| `t` | Show a clock in the current pane |
-| `?` | List all keybindings |
-| `~` | Show tmux messages log |
-| `i` | Display window information |
+For the complete keybinding reference, see `references/keybindings-cheatsheet.md`.
 
 ## Command Line Usage
 
@@ -201,30 +124,7 @@ bind -T copy-mode-vi key command   # Bind in vi copy mode table
 unbind key                 # Remove a binding
 ```
 
-### Status Bar Customization
-
-```bash
-set -g status-position top              # Status bar at top
-set -g status-interval 5                # Refresh every 5 seconds
-set -g status-left-length 40
-set -g status-left "#[fg=green]#S #[fg=yellow]#I:#P "
-set -g status-right "#[fg=cyan]%H:%M #[fg=white]%d-%b-%y"
-set -g status-style "bg=black,fg=white"
-setw -g window-status-current-style "fg=black,bg=green"
-```
-
-### Clipboard Integration
-
-```bash
-# Linux (X11)
-bind -T copy-mode-vi y send -X copy-pipe-and-cancel "xclip -selection clipboard"
-# Linux (Wayland)
-bind -T copy-mode-vi y send -X copy-pipe-and-cancel "wl-copy"
-# macOS
-bind -T copy-mode-vi y send -X copy-pipe-and-cancel "pbcopy"
-```
-
-See `references/config-recipes.md` for complete ready-to-use configurations.
+For complete ready-to-use configurations (minimal, power user, cyberpunk themed, developer workflow), see `references/config-recipes.md`.
 
 ## Popular Plugins (via TPM)
 
@@ -247,13 +147,13 @@ Install plugins: `prefix + I`. Update: `prefix + U`. Uninstall removed plugins: 
 
 | Plugin | Purpose |
 |--------|---------|
-| `tmux-plugins/tmux-sensible` | Universal sane defaults everyone agrees on |
-| `tmux-plugins/tmux-resurrect` | Save and restore sessions across tmux server restarts (`prefix + C-s` save, `prefix + C-r` restore) |
+| `tmux-plugins/tmux-sensible` | Universal sane defaults |
+| `tmux-plugins/tmux-resurrect` | Save and restore sessions across restarts (`prefix + C-s` save, `prefix + C-r` restore) |
 | `tmux-plugins/tmux-continuum` | Automatic session saving (every 15 min) and auto-restore on server start |
 | `tmux-plugins/tmux-yank` | Clipboard integration (copies to system clipboard automatically) |
 | `tmux-plugins/tmux-pain-control` | Intuitive pane bindings: `prefix + h/j/k/l` navigate, `prefix + H/J/K/L` resize |
 | `sainnhe/tmux-fzf` | Fuzzy finder for sessions, windows, panes, keybindings, and commands |
-| `tmux-plugins/tmux-prefix-highlight` | Show indicator in status bar when prefix is active |
+| `tmux-plugins/tmux-prefix-highlight` | Status bar indicator when prefix is active |
 | `tmux-plugins/tmux-open` | Open highlighted file/URL from copy mode |
 
 ## Scripting and Automation
@@ -343,41 +243,16 @@ Use conditionals: `#{?condition,true-value,false-value}` and string comparison: 
 
 ### Nested tmux (SSH)
 
-When running tmux inside tmux (e.g., local tmux + remote tmux over SSH), you need a way to send the prefix to the inner session. Common pattern:
+When running tmux inside tmux (e.g., local tmux + remote tmux over SSH), send the prefix to the inner session with a common pattern:
 
 ```bash
 # In local .tmux.conf: press prefix twice to send prefix to inner tmux
-bind C-a send-prefix   # if your prefix is C-a
+bind C-a send-prefix   # if the prefix is C-a
 ```
 
-Or use a different prefix on the remote machine (e.g., local uses `C-a`, remote uses `C-b`).
+Alternatively, use a different prefix on the remote machine (e.g., local uses `C-a`, remote uses `C-b`).
 
-A more sophisticated approach toggles the outer session off when working in the inner one:
-```bash
-bind -T root F12  \
-  set prefix None \;\
-  set key-table off \;\
-  set status-style "bg=colour238" \;\
-  if -F '#{pane_in_mode}' 'send-keys -X cancel' \;\
-  refresh-client -S
-
-bind -T off F12 \
-  set -u prefix \;\
-  set -u key-table \;\
-  set -u status-style \;\
-  refresh-client -S
-```
-
-### Performance Tuning
-
-```bash
-set -sg escape-time 0          # Zero delay for Escape (essential for vim/neovim)
-set -g history-limit 50000     # Large scrollback (default 2000 is too small)
-set -g display-time 4000       # Message display duration (ms)
-set -g repeat-time 600         # Time for repeatable bindings (ms)
-set -g focus-events on         # Pass focus events to applications (needed by vim)
-set -g aggressive-resize on    # Resize window to smallest *active* client
-```
+A more sophisticated approach toggles the outer session off when working in the inner one. See `references/config-recipes.md` (Shared Snippets > Nested tmux Toggle) for the full F12 toggle recipe.
 
 ### Popup Windows (tmux 3.2+)
 
@@ -419,14 +294,14 @@ set -sg escape-time 0
 **Mouse scroll opens copy mode but does not scroll in vim/less:**
 ```bash
 set -g mouse on
-# Modern tmux handles this automatically; ensure your terminal supports it
+# Modern tmux handles this automatically; ensure the terminal supports it
 ```
 
 **Pane content garbled after resize:**
 ```bash
 # Force redraw
 tmux refresh-client
-# Or press prefix + r if you have a refresh binding
+# Or press prefix + r if a refresh binding exists
 ```
 
 **Session lost after reboot:**
@@ -438,8 +313,8 @@ unset TMUX   # Clear the TMUX env var, then attach
 tmux attach -t session-name
 ```
 
-## Progressive Disclosure
+## Additional Resources
 
 - Complete keybinding reference: `references/keybindings-cheatsheet.md`
-- Ready-to-use configuration recipes: `references/config-recipes.md`
+- Ready-to-use configuration recipes (minimal, power user, cyberpunk, developer workflow): `references/config-recipes.md`
 - Quick tmux help: `/tmux-help` command
