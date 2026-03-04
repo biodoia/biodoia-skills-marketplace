@@ -1,0 +1,21 @@
+{
+  "name": "multi-lsp",
+  "description": "Multi-LSP Combiner — auto-detects project tech stack and configures unified LSP experience by combining multiple modular language servers for polyglot codebases",
+  "version": "0.1.0",
+  "author": {
+    "name": "biodoia",
+    "email": "biodoia@users.noreply.github.com"
+  },
+  "repository": "https://github.com/biodoia/biodoia-skills-marketplace",
+  "license": "MIT",
+  "keywords": [
+    "lsp",
+    "language-server",
+    "multi-language",
+    "tooling",
+    "ide",
+    "completion",
+    "diagnostics",
+    "refactoring"
+  ]
+}
