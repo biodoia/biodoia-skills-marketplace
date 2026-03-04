@@ -1,6 +1,6 @@
 ---
 name: toolbox-discovery
-description: Use when wanting to discover what tools are installed on the system, identify misconfigured or underutilized tools, activate dormant capabilities, optimize the development environment, or find missing tools for a project. Also use when mentioning 'what tools do I have', 'system inventory', 'tool discovery', 'setup my environment', 'missing tools', 'optimize dev setup', 'activate tools', or wanting a comprehensive overview of available system capabilities.
+description: This skill should be used when the user asks "what tools do I have", "system inventory", "tool discovery", "setup my environment", "missing tools", "optimize dev setup", "activate tools", or "what's installed". Make sure to use this skill whenever the user wants to discover installed tools, identify misconfigured or underutilized tools, activate dormant capabilities, optimize their development environment, find missing tools for a project, or get a comprehensive overview of available system capabilities, even if they just mention wanting to improve their setup or wondering what's available on their machine.
 ---
 
 # Toolbox Discovery & Activation
@@ -9,7 +9,7 @@ A comprehensive system inventory and smart configuration skill. Scans the system
 
 ## Philosophy
 
-**"You can't use what you don't know you have."**
+**"One cannot use what one does not know exists."**
 
 Most developers have dozens, sometimes hundreds, of tools installed on their systems but actively use only a fraction of them. Tools get installed for one project and forgotten. Package managers pull in utilities as dependencies that never get used directly. Default configurations leave powerful features dormant. Integrations between tools that would multiply productivity remain unconnected.
 
@@ -162,25 +162,15 @@ For each runtime found, also check:
 | Backup | `borgbackup`, `borg`, `restic`, `timeshift`, `snapper` |
 | Archive | `tar`, `zip`, `unzip`, `7z`, `zstd`, `xz`, `gzip`, `bzip2` |
 
-#### Media & Graphics
+#### Media, Graphics & System Utilities
 
 | Category | Tools to Scan |
 |----------|--------------|
-| Video/Audio | `ffmpeg`, `ffprobe`, `mpv`, `vlc`, `yt-dlp`, `youtube-dl`, `sox` |
-| Images | `imagemagick`, `convert`, `gimp`, `inkscape`, `optipng`, `pngquant`, `jpegoptim` |
-| Recording | `obs-studio`, `obs`, `wf-recorder`, `arecord`, `pactl` |
-| Docs | `pandoc`, `typst`, `latex`, `pdflatex`, `wkhtmltopdf`, `weasyprint` |
-
-#### System Utilities
-
-| Category | Tools to Scan |
-|----------|--------------|
-| Services | `systemctl`, `loginctl`, `journalctl`, `timedatectl`, `hostnamectl` |
-| Hardware | `lsblk`, `blkid`, `fdisk`, `parted`, `smartctl`, `hdparm` |
-| Info | `dmidecode`, `lscpu`, `lspci`, `lsusb`, `inxi`, `neofetch`, `fastfetch` |
-| Network config | `ip`, `ss`, `nmcli`, `iwctl`, `networkctl` |
-| Firewall | `ufw`, `firewalld`, `firewall-cmd`, `iptables`, `nftables` |
-| Cron/Timers | `crontab`, `systemctl list-timers`, `at`, `anacron` |
+| Video/Audio | `ffmpeg`, `ffprobe`, `mpv`, `vlc`, `yt-dlp`, `sox` |
+| Images/Docs | `imagemagick`, `gimp`, `inkscape`, `pandoc`, `typst` |
+| System services | `systemctl`, `loginctl`, `journalctl`, `timedatectl` |
+| Hardware info | `lsblk`, `blkid`, `lscpu`, `lspci`, `lsusb`, `inxi`, `fastfetch` |
+| Network/Firewall | `ip`, `ss`, `nmcli`, `ufw`, `firewall-cmd`, `iptables` |
 
 ---
 
@@ -276,106 +266,40 @@ Based on what is installed, recommend complementary tools. The logic follows pat
 | `diff` | `delta` | Syntax highlighting, side-by-side, git integration |
 | `man` | `tldr`, `cheat` | Practical examples instead of full manpages |
 
-**Stack Completers:**
-- Have `go` but no `golangci-lint`? -> Recommend it for linting
-- Have `docker` but no `lazydocker`? -> Recommend it for TUI management
-- Have `kubectl` but no `k9s`? -> Recommend it for cluster TUI
-- Have `git` but no `lazygit`? -> Recommend it for TUI git
-- Have `python` but no `ruff`? -> Recommend it for fast linting
-- Have `node` but no `pnpm`? -> Recommend it for fast package management
-- Have `zsh` but no `starship`? -> Recommend it for universal prompt
-- Have `tmux` but no config? -> Recommend sensible defaults
-- Have any shell but no `fzf`? -> Recommend it for everything
+**Stack Completers** (recommend when the base tool is present but the complement is missing):
 
-**Security Gap Analysis:**
-- No `git-crypt` or `sops`? -> Recommend for secrets management
-- No `age` or `gpg`? -> Recommend for encryption
-- No firewall active? -> Recommend `ufw` setup
-- No `fail2ban`? -> Recommend for SSH protection
-- No `lynis`? -> Recommend for security auditing
+| Base Tool | Missing Complement | Purpose |
+|-----------|-------------------|---------|
+| `go` | `golangci-lint` | Linting |
+| `docker` | `lazydocker` | TUI management |
+| `kubectl` | `k9s` | Cluster TUI |
+| `git` | `lazygit` | TUI git |
+| `python` | `ruff` | Fast linting |
+| `node` | `pnpm` | Fast package management |
+| `zsh` | `starship` | Universal prompt |
+| any shell | `fzf` | Fuzzy finding everywhere |
 
-**Refer to the full tool catalog for install commands and descriptions:**
-```
-Read: skills/toolbox-discovery/references/tool-catalog.md
-```
+**Security Gap Analysis** — Flag missing: `git-crypt`/`sops` (secrets), `age`/`gpg` (encryption), `ufw` (firewall), `fail2ban` (SSH protection), `lynis` (security audit).
+
+Refer to `references/tool-catalog.md` for the full catalog with install commands and descriptions.
 
 ---
 
 ## Output Format
 
-Present the discovery report in this structured format:
+Present the discovery report with these sections, using status indicators per tool:
 
+- **Status markers**: checkmark (installed + configured), `!` (installed, needs attention), `x` (not installed)
+- **Sections**: System info header, then per-category listings (Languages & Runtimes, Package Managers, Containers, Version Control, AI Tools, Editors, Terminal, File Utilities, Networking), followed by Health Issues, Quick Wins, and Missing Tool Recommendations.
+
+Example entry format:
 ```
-TOOLBOX DISCOVERY REPORT
-========================
-System: <os> <version> | Shell: <shell> | Package Manager: <pm>
-Scan date: <date>
-
-LANGUAGES & RUNTIMES:
   [checkmark] go 1.24.1        [configured] gopls, golangci-lint, air, templ
-  [checkmark] node 22.4.0      [configured] npm, pnpm, bun
-  [checkmark] python 3.12.3    [partial]    pip, uv -- missing: pyright, ruff
-  [x] rust                     [not installed]
-
-PACKAGE MANAGERS:
-  [checkmark] pacman           [configured]
-  [checkmark] yay              [configured]
-  [checkmark] flatpak          [configured]
-
-CONTAINERS:
-  [checkmark] docker 27.1.0    [running]    compose, buildx
-  [x] podman                   [not installed]
-
-VERSION CONTROL:
-  [checkmark] git 2.47.0       [configured] gh, lazygit, delta
   [!] git-lfs                  [installed but not configured]
-
-AI TOOLS:
-  [checkmark] claude           [configured]
-  [checkmark] ollama           [running]    models: llama3, nomic-embed-text
-  [checkmark] aider            [configured]
-  [x] codex                    [not installed]
-
-EDITORS:
-  [checkmark] nvim 0.10.0      [configured] lazy.nvim, LSP, treesitter
-  [checkmark] code             [configured]
-
-TERMINAL:
-  [checkmark] zsh 5.9          [configured] oh-my-zsh, fzf, zoxide
-  [checkmark] tmux 3.4         [configured]
-  [checkmark] starship         [configured]
-
-FILE UTILITIES:
-  [checkmark] fd               [configured]
-  [checkmark] rg               [configured]
-  [checkmark] fzf              [configured] zsh integration active
-  [checkmark] bat              [configured] MANPAGER set
-  [checkmark] eza              [configured]
-
-NETWORKING:
-  [checkmark] curl             [configured]
-  [checkmark] tailscale        [running]
-  [checkmark] ssh              [configured] agent running
-
-HEALTH ISSUES:
-  [!] git-lfs: installed but hooks not configured
-  [!] docker: user not in docker group (requires sudo)
-  [!] conda: found but not in PATH
-
-QUICK WINS (activate now):
-  1. Set bat as MANPAGER: export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-  2. Enable fzf alt-C keybinding in zsh
-  3. Install zsh completions for docker and kubectl
-  4. Set delta as git diff pager
-
-MISSING (recommended for your stack):
-  - ruff        -- fast Python linter    -- pacman -S ruff
-  - lazydocker  -- Docker TUI            -- pacman -S lazydocker
-  - dust        -- better du             -- pacman -S dust
-  - atuin       -- shell history search  -- pacman -S atuin
+  [x] rust                     [not installed]
 ```
 
-Adapt the checkmark/x/! symbols to the terminal's capability. Use color if the output supports it.
+Each section should list the install command for missing recommended tools. Adapt symbols to the terminal's capability and use color if supported.
 
 ---
 
@@ -400,9 +324,9 @@ bash skills/toolbox-discovery/scripts/activate-tools.sh shell
 
 ---
 
-## Progressive Disclosure
+## Additional Resources
 
-- For the full catalog of tools with install commands: read `references/tool-catalog.md`
-- For ready-to-apply activation recipes: read `references/activation-recipes.md`
-- For the automated discovery script: run `scripts/discover-tools.sh`
-- For the automated activation script: run `scripts/activate-tools.sh`
+- **`references/tool-catalog.md`** — Full catalog of recommended tools organized by category, with descriptions, install commands (pacman, yay, pip, cargo, npm), and links to project pages.
+- **`references/activation-recipes.md`** — Ready-to-apply configuration recipes for shell integrations, tool configs, integration chains (fzf+bat+delta+git), and environment variables.
+- **`scripts/discover-tools.sh`** — Automated discovery script that scans all tool categories and outputs a structured report (text or JSON with `--json` flag).
+- **`scripts/activate-tools.sh`** — Automated activation script that backs up existing configs and applies recommended configurations per tool or category.
