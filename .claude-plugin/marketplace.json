@@ -83,6 +83,34 @@
       "category": "design",
       "source": "./plugins/retro-pixel-ui",
       "homepage": "https://github.com/biodoia/biodoia-skills-marketplace"
+    },
+    {
+      "name": "sdd-steroids",
+      "description": "Specification-Driven Development on steroids — pre-planning RECON from HN/daily.dev/lobste.rs, emerging best practices research, agentic patterns, 5-phase workflow with real-time intelligence",
+      "category": "workflow",
+      "source": "./plugins/sdd-steroids",
+      "homepage": "https://github.com/biodoia/biodoia-skills-marketplace"
+    },
+    {
+      "name": "multi-lsp",
+      "description": "Multi-LSP combiner — auto-detect stack, configure 24+ language servers, generate editor configs for Neovim/VS Code/Helix/Zed, stack presets, install scripts",
+      "category": "tooling",
+      "source": "./plugins/multi-lsp",
+      "homepage": "https://github.com/biodoia/biodoia-skills-marketplace"
+    },
+    {
+      "name": "wayland-multimonitor",
+      "description": "Wayland multi-monitor expert — Hyprland, Sway, KDE, GNOME configs, kanshi profiles, fractional scaling, VRR/gaming, screen sharing, Nvidia guide, troubleshooting",
+      "category": "desktop",
+      "source": "./plugins/wayland-multimonitor",
+      "homepage": "https://github.com/biodoia/biodoia-skills-marketplace"
+    },
+    {
+      "name": "toolbox-discovery",
+      "description": "System tools discovery & activation — scans 200+ tools across 14 categories, identifies misconfigured or missing tools, applies activation recipes with backup, recommends modern alternatives",
+      "category": "system-management",
+      "source": "./plugins/toolbox-discovery",
+      "homepage": "https://github.com/biodoia/biodoia-skills-marketplace"
     }
   ]
 }
