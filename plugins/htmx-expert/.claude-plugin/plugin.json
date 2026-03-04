@@ -1,0 +1,20 @@
+{
+  "name": "htmx-expert",
+  "description": "Comprehensive HTMX and hypermedia-driven application expert — attributes, events, SSE, WebSocket, OOB swaps, server integration, patterns, and Go/Python/Node templating",
+  "version": "0.1.0",
+  "author": {
+    "name": "biodoia",
+    "email": "biodoia@users.noreply.github.com"
+  },
+  "repository": "https://github.com/biodoia/biodoia-skills-marketplace",
+  "license": "MIT",
+  "keywords": [
+    "htmx",
+    "hypermedia",
+    "hateoas",
+    "html",
+    "sse",
+    "websocket",
+    "frontend"
+  ]
+}
