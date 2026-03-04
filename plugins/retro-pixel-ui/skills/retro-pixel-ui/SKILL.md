@@ -1,6 +1,6 @@
 ---
 name: retro-pixel-ui
-description: Use when designing or building retro-styled, pixel art, 8-bit, 16-bit, cyberpunk neon, or nostalgic gaming-inspired user interfaces and web applications. Also use when mentioning 'pixel art UI', 'retro design', '8-bit style', '16-bit aesthetic', 'cyberpunk UI', 'neon glow', 'scanlines', 'CRT effect', 'game UI', 'pixel font', 'chiptune aesthetic', or wanting distinctive non-generic frontend design.
+description: This skill should be used when the user asks about "pixel art UI", "retro design", "8-bit style", "16-bit aesthetic", "cyberpunk UI", "neon glow", "scanlines", "CRT effect", "game UI", "pixel font", "chiptune", or "NES.css". Make sure to use this skill whenever the user wants to design or build retro-styled, pixel art, cyberpunk neon, or nostalgic gaming-inspired user interfaces, needs CSS effects like scanlines, CRT curvature, neon glow, or pixel borders, or wants distinctive non-generic frontend design with a retro aesthetic, even if they just mention wanting a cool or unique UI style.
 ---
 
 # Retro Pixel UI/UX Design
@@ -11,23 +11,21 @@ Expert skill for designing and building retro gaming-inspired, pixel art, 8-bit/
 
 ### Constraints Breed Creativity
 
-The golden era of gaming (1983-1995) produced some of the most iconic visual designs in history, not despite hardware limitations but because of them. The NES had 54 colors and 256x240 resolution. The Game Boy had 4 shades of green. These constraints forced designers to communicate with extraordinary economy.
+The golden era of gaming (1983-1995) produced iconic visual designs not despite hardware limitations but because of them. The NES had 54 colors and 256x240 resolution. The Game Boy had 4 shades of green. These constraints forced extraordinary economy.
 
 Apply the same discipline to modern UI:
-- **Limited palettes**: Pick 4-8 core colors and stick to them. Every color earns its place.
-- **Pixel grid thinking**: Design on a grid (8px, 16px, 32px base units). Every element snaps to the grid. No fractional pixels, no arbitrary spacing.
-- **Tile-based composition**: Build screens from reusable tiles, just as hardware sprite engines did. Components are modular squares and rectangles that tessellate cleanly.
-- **Intentional imperfection**: Slight glow bleeds, scanline gaps, and CRT curvature remind users this is a crafted aesthetic, not a bug.
+- **Limited palettes**: Pick 4-8 core colors. Every color earns its place.
+- **Pixel grid thinking**: Design on a grid (8px, 16px, 32px base units). Every element snaps. No fractional pixels.
+- **Tile-based composition**: Build screens from reusable tiles, just as hardware sprite engines did. Components tessellate cleanly.
+- **Intentional imperfection**: Slight glow bleeds, scanline gaps, and CRT curvature remind users this is a crafted aesthetic.
 
 ### Nostalgia as UX Enhancer
 
-Nostalgia is a powerful UX tool. Users who grew up with NES, SNES, Genesis, Game Boy, and arcade cabinets have deeply ingrained pattern recognition for these visual languages:
+Users who grew up with NES, SNES, Genesis, and arcade cabinets have deeply ingrained pattern recognition:
 - **RPG dialog boxes** instantly signal "read this text carefully"
 - **HP/MP bars** communicate progress more viscerally than generic progress bars
-- **Menu cursors (arrow pointers)** make navigation feel deliberate and satisfying
-- **Pixel borders** create visual hierarchy without needing drop shadows or blur
-
-Even users without direct nostalgia recognize these patterns as intentional, distinctive, and characterful -- the opposite of yet another flat Material Design clone.
+- **Menu cursors** make navigation feel deliberate and satisfying
+- **Pixel borders** create visual hierarchy without drop shadows or blur
 
 ### Cyberpunk Neon Overlay
 
@@ -36,71 +34,54 @@ The cyberpunk aesthetic extends retro gaming visuals into the future:
 - **Neon glow effects** -- magenta, cyan, and green light bleeding through darkness
 - **Terminal aesthetics** -- monospaced fonts, blinking cursors, command-line echoes
 - **Scanline overlays** -- the ghost of CRT phosphors, adding texture and depth
-- **Information density** -- HUD-style layouts dense with data, like a hacker's terminal
+- **Information density** -- HUD-style layouts dense with data
 
 ### Balance: Retro Aesthetics + Modern Usability
 
 Retro style must never compromise function:
 - **Responsive**: Scale pixel art cleanly using `image-rendering: pixelated` and integer scaling
-- **Accessible**: Neon-on-dark already provides excellent contrast ratios. Add proper ARIA, focus management, and motion preferences
+- **Accessible**: Neon-on-dark provides excellent contrast ratios. Add proper ARIA, focus management, and motion preferences
 - **Performant**: CSS-based effects over JS. Lightweight pixel fonts. Minimal paint complexity
-- **Progressive**: Start with semantic HTML, layer pixel aesthetics on top. Works without CSS, looks extraordinary with it
+- **Progressive**: Start with semantic HTML, layer pixel aesthetics on top
 
 ## Color Palettes
 
 ### Core Cyberpunk Neon Palette (Default)
 
-The recommended palette for all retro pixel UIs:
-
 ```css
 :root {
-  /* Primary neons */
   --neon-primary: #ff00ff;       /* Magenta -- main accent, links, active states */
   --neon-secondary: #00ffff;     /* Cyan -- secondary accent, highlights, info */
   --neon-accent: #39ff14;        /* Neon green -- success, terminal, data */
   --neon-hot: #ff1493;           /* Hot pink -- warnings, emphasis, hover */
   --neon-blue: #0066ff;          /* Electric blue -- buttons, interactive */
-
-  /* Backgrounds */
   --bg-void: #0a0a0a;           /* True dark -- page background */
   --bg-panel: #1a1a2e;          /* Deep navy -- card/panel background */
   --bg-surface: #16213e;        /* Lighter navy -- elevated surfaces */
   --bg-hover: #0f3460;          /* Hover state background */
-
-  /* Text */
   --text-primary: #e0e0ff;      /* Soft lavender white -- body text */
   --text-secondary: #8888aa;    /* Muted -- secondary text */
-  --text-glow: #ffffff;         /* Pure white -- for glow effect source */
-
-  /* Effects */
   --scanline-opacity: 0.03;     /* Subtle scanline overlay */
   --glow-spread: 20px;          /* Neon glow radius */
   --pixel-unit: 4px;            /* Base pixel grid unit */
-
-  /* Semantic */
-  --color-success: #39ff14;     /* Neon green */
-  --color-warning: #ffaa00;     /* Amber */
-  --color-danger: #ff0040;      /* Red neon */
-  --color-info: #00ffff;        /* Cyan */
+  --color-success: #39ff14;
+  --color-warning: #ffaa00;
+  --color-danger: #ff0040;
+  --color-info: #00ffff;
 }
 ```
 
 ### Classic Console Palettes
 
-Use these when targeting a specific retro hardware aesthetic:
+Use these when targeting a specific retro hardware aesthetic. Full hex tables with RGB values and usage guidelines are in `references/palettes.md`.
 
-- **NES (54 colors)**: See `references/palettes.md` for full hex table
+- **NES (54 colors)**: The full PPU palette -- iconic and immediately recognizable
 - **Game Boy (4 greens)**: #0f380f, #306230, #8bac0f, #9bbc0f
-- **CGA (16 colors)**: The original PC palette, iconic and limited
-- **SNES**: Richer palette, up to 256 on-screen from 32768 possible
+- **CGA (16 colors)**: The original PC palette
+- **SNES Warm**: Richer RPG-inspired palette (Chrono Trigger, FF6)
+- **Synthwave / Vaporwave**: Sunset pinks, deep purples, chrome blues
 - **Amber monochrome**: #ff8800 on #1a0800 -- classic terminal
 - **Green monochrome**: #33ff33 on #0a1a0a -- hacker terminal
-
-### Palette Generators
-
-- **Lospec** (lospec.com/palette-list): Curated retro palettes, filter by color count
-- **Coolors** (coolors.co): Generate palettes, lock retro anchor colors
-- **Color Hunt**: Search "retro", "neon", "cyberpunk" for curated sets
 
 ## Typography
 
@@ -112,18 +93,7 @@ Use these when targeting a specific retro hardware aesthetic:
 | VT323 | Terminal CRT | Google Fonts | Body text, monospace content |
 | Silkscreen | Clean pixel | Google Fonts | Small UI labels, buttons |
 | Pixelify Sans | Modern pixel | Google Fonts | Body text, readable pixel |
-| DotGothic16 | Japanese pixel | Google Fonts | Japanese-style retro |
 | IBM Plex Mono | Terminal | Google Fonts | Code, terminal text |
-| Kongtext | Chunky 8-bit | Free | Large display headings |
-| Upheaval | Bold 16-bit | Free | Impact headings |
-
-### Font Loading
-
-```html
-<!-- Google Fonts -- fast and reliable -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Silkscreen&display=swap" rel="stylesheet">
-```
 
 ### Font Rendering
 
@@ -145,17 +115,16 @@ Force sharp, pixel-perfect rendering -- no anti-aliasing:
 Maintain pixel-perfect sizing with integer multiples of the base pixel unit:
 
 ```css
-.text-xs  { font-size: 8px;  line-height: 12px; }  /* Tiny labels */
-.text-sm  { font-size: 12px; line-height: 16px; }  /* Small UI text */
-.text-md  { font-size: 16px; line-height: 24px; }  /* Body text */
-.text-lg  { font-size: 24px; line-height: 32px; }  /* Subheadings */
-.text-xl  { font-size: 32px; line-height: 40px; }  /* Headings */
-.text-2xl { font-size: 48px; line-height: 56px; }  /* Display titles */
+.text-xs  { font-size: 8px;  line-height: 12px; }
+.text-sm  { font-size: 12px; line-height: 16px; }
+.text-md  { font-size: 16px; line-height: 24px; }
+.text-lg  { font-size: 24px; line-height: 32px; }
+.text-xl  { font-size: 32px; line-height: 40px; }
+.text-2xl { font-size: 48px; line-height: 56px; }
 ```
 
-### Text Effects
+### Neon Glow Text
 
-**Neon glow text:**
 ```css
 .neon-text {
   color: var(--neon-primary);
@@ -167,81 +136,46 @@ Maintain pixel-perfect sizing with integer multiples of the base pixel unit:
 }
 ```
 
-**Typewriter effect** requires JS -- see `references/component-templates.md` for the full implementation.
-
 ## CSS Effects & Techniques
 
-All effects are documented with copy-paste code in `references/css-effects-library.md`. Summary:
+All effects are documented with full copy-paste code in `references/css-effects-library.md`. Summary of available effects:
 
-### CRT Scanlines
-A `::after` pseudo-element with `repeating-linear-gradient` creates horizontal lines across the screen. Keep opacity at 0.03-0.05 for subtlety.
-
-### CRT Screen Curvature
-Apply slight barrel distortion using CSS transforms to simulate a curved CRT monitor.
-
-### Neon Glow
-Multi-layer `text-shadow` or `box-shadow` with increasing blur radius and decreasing opacity. Stack 3-5 shadows for rich glow depth.
-
-### Pixel Borders
-Use `box-shadow` with zero blur and pixel-unit offsets to create stepped, pixelated borders. No border-radius -- sharp corners only.
-
-### Screen Noise / Static
-CSS `@keyframes` animation cycling opacity on a high-frequency noise overlay. Keep lightweight.
-
-### Chromatic Aberration
-Offset `text-shadow` in red, green, and blue channels with slight horizontal displacement.
-
-### Dithering Patterns
-CSS `background-image` with `repeating-linear-gradient` at 45 degrees to simulate pixel dithering.
-
-### Pixelated Image Scaling
-```css
-.pixel-art {
-  image-rendering: pixelated;           /* Chrome, Firefox */
-  image-rendering: -moz-crisp-edges;    /* Firefox fallback */
-  image-rendering: crisp-edges;         /* Standard */
-  -ms-interpolation-mode: nearest-neighbor; /* IE */
-}
-```
+- **CRT Scanlines** -- `::after` pseudo-element with `repeating-linear-gradient`. Keep opacity at 0.03-0.05.
+- **CRT Screen Curvature** -- Barrel distortion using CSS transforms and inset box-shadow.
+- **Neon Glow** -- Multi-layer `text-shadow` or `box-shadow` (3-5 shadow layers for depth).
+- **Pixel Borders** -- `box-shadow` with zero blur and pixel-unit offsets. Sharp corners only.
+- **Screen Noise / Static** -- CSS `@keyframes` cycling opacity on a noise overlay.
+- **Chromatic Aberration** -- Offset `text-shadow` in RGB channels.
+- **Dithering Patterns** -- `repeating-linear-gradient` at 45 degrees for pixel dithering.
+- **Pixelated Image Scaling:**
+  ```css
+  .pixel-art {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+  ```
 
 ## Component Patterns
 
 Complete HTML+CSS templates for all components are in `references/component-templates.md`. Design principles for each:
 
-### Dialog Boxes
-RPG-style text boxes with double-pixel borders, dark semi-transparent backgrounds, character portrait on the left, text appearing with typewriter effect. The blinking triangle at the bottom-right signals "press to continue."
-
-### Menus
-Vertical lists with a pixel arrow cursor (using `::before` content: "\\25B8"). Active item has a glowing highlight bar. Arrow keys navigate, Enter selects. Add subtle SFX on selection change.
-
-### Buttons
-No border-radius. Pixel borders via `box-shadow`. On `:active`, translate down 2px and remove bottom shadow to simulate physical press. Three variants: primary (magenta), secondary (cyan), danger (red neon).
-
-### Health / Progress Bars
-Segmented bars with individual pixel blocks that fill or drain. Color transitions: green > yellow > red as value decreases. Label text outside or inside the bar.
-
-### Inventory Grids
-Tile-based grid (32px or 64px cells) with pixel borders. Hover shows item tooltip. Empty cells have subtle dithering pattern. Drag-and-drop for reordering.
-
-### Navigation
-Top bar or sidebar with pixel icons. Active state uses neon underline glow. Mobile: hamburger menu slides in with pixel animation.
-
-### Cards / Panels
-Bordered panels with pixel corners and a title bar reminiscent of 90s OS windows. Optional close button (X) in title bar. Content area with consistent padding on pixel grid.
-
-### Forms
-Input fields with pixel borders, blinking cursor, no rounded corners. Validation states use pixel icons: green checkmark, red X, yellow warning triangle.
-
-### Notifications / Toasts
-Pop-up from screen edge with pixel slide animation. Pixel art icons for message type. Auto-dismiss with segmented timer bar.
-
-### Loading States
-Pixel spinner (rotating pixel square), segmented progress bar filling left to right, "NOW LOADING..." text with animated dots.
+| Component | Key Design Principle |
+|-----------|---------------------|
+| Dialog Boxes | RPG-style with double-pixel borders, typewriter text, blinking continue indicator |
+| Menus | Pixel arrow cursor (`::before`), glowing highlight bar, arrow key navigation |
+| Buttons | No border-radius. Pixel borders via `box-shadow`. Translate down 2px on `:active` |
+| HP/Progress Bars | Segmented pixel blocks. Color transitions: green > yellow > red |
+| Inventory Grids | Tile-based grid (32/64px cells), dithering on empty cells, hover tooltips |
+| Cards / Panels | Pixel corners, 90s-OS-style title bar, consistent padding on pixel grid |
+| Forms | Pixel borders, blinking cursor, no rounded corners. Pixel icon validation states |
+| Notifications | Pixel slide animation, auto-dismiss with segmented timer bar |
+| Loading States | Pixel spinner, segmented progress bar, "NOW LOADING..." with animated dots |
 
 ## Animation Patterns
 
 ### Sprite Sheets
-Use CSS `steps()` timing function with `background-position` to animate sprite sheets frame-by-frame:
+
+Use CSS `steps()` timing function with `background-position` to animate frame-by-frame:
 ```css
 .sprite {
   width: 32px; height: 32px;
@@ -253,25 +187,17 @@ Use CSS `steps()` timing function with `background-position` to animate sprite s
 }
 ```
 
-### Parallax Scrolling
-Multi-layer backgrounds scrolling at different speeds, like classic side-scrollers. Use `background-attachment: fixed` with different `background-position` rates, or CSS `transform: translateZ()` with `perspective`.
-
 ### Screen Transitions
 - **Fade**: Simple opacity transition
 - **Wipe**: CSS clip-path animating from left to right
 - **Pixelate dissolve**: Scale down + pixelate filter, then scale up new content
 - **Iris**: Circular clip-path expanding from center
 
-### Text Reveal
-Character-by-character typewriter using JS `setInterval` with a cursor element that blinks independently.
-
 ## Audio Cues (Optional Enhancement)
 
 ### Chiptune SFX
-Add 8-bit sound effects to UI interactions for full immersion:
 
 ```javascript
-// Lightweight approach with Web Audio API
 const audioCtx = new AudioContext();
 function playBeep(freq = 440, duration = 0.1, type = 'square') {
   const osc = audioCtx.createOscillator();
@@ -286,29 +212,22 @@ function playBeep(freq = 440, duration = 0.1, type = 'square') {
 }
 ```
 
-### UI Sound Mapping
 | Action | Sound | Frequency/Pattern |
 |--------|-------|-------------------|
 | Menu navigate | Short blip | 440Hz, 50ms, square |
 | Confirm/Select | Rising tone | 523-784Hz sweep, 100ms |
 | Cancel/Back | Descending tone | 392-262Hz sweep, 100ms |
 | Error | Buzz | 150Hz, 200ms, sawtooth |
-| Notification | Two-tone | 660-880Hz, 80ms each |
 
-### Libraries
-- **Howler.js**: Lightweight audio sprite management
-- **Tone.js**: Synthesizer for procedural chiptune
-- **jsfxr**: Browser-based SFX generator (retro sound effects)
+Libraries: **Howler.js** (audio sprites), **Tone.js** (procedural chiptune), **jsfxr** (retro SFX generator).
 
 ## Layout Patterns
 
 ### Fixed-Ratio Viewport
-Maintain classic aspect ratios with letterboxing:
 ```css
 .game-viewport {
-  aspect-ratio: 4 / 3;       /* Classic CRT ratio */
+  aspect-ratio: 4 / 3;
   max-width: 960px;
-  max-height: 720px;
   margin: 0 auto;
   background: var(--bg-void);
   overflow: hidden;
@@ -316,39 +235,15 @@ Maintain classic aspect ratios with letterboxing:
 }
 ```
 
-### Tile Grid
-Base all spacing on pixel grid multiples:
-```css
-.tile-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
-  gap: 0;  /* Tiles touch -- no gaps in pixel grids */
-}
-```
-
 ### HUD Overlay
-Fixed-position status elements overlaying the main content:
 ```css
 .hud { position: fixed; z-index: 100; pointer-events: none; }
-.hud-top-left { top: 8px; left: 8px; }      /* HP, level */
-.hud-top-right { top: 8px; right: 8px; }     /* Score, time */
-.hud-bottom { bottom: 0; left: 0; right: 0; } /* Dialog, menu */
-```
-
-### RPG Split Layout
-Classic RPG: large viewport on top, dialog/menu panel on bottom:
-```css
-.rpg-layout {
-  display: grid;
-  grid-template-rows: 1fr auto;
-  height: 100vh;
-}
-.rpg-viewport { min-height: 60vh; }
-.rpg-dialog { max-height: 40vh; padding: 16px; }
+.hud-top-left { top: 8px; left: 8px; }
+.hud-top-right { top: 8px; right: 8px; }
+.hud-bottom { bottom: 0; left: 0; right: 0; }
 ```
 
 ### Responsive Pixel Scaling
-Scale pixel art UIs to larger screens while maintaining crispness:
 ```css
 @media (min-width: 768px) {
   .pixel-scale { transform: scale(2); transform-origin: top left; }
@@ -360,34 +255,23 @@ Scale pixel art UIs to larger screens while maintaining crispness:
 
 ## Frameworks & Tools
 
-### CSS Frameworks
 | Framework | Style | URL | Notes |
 |-----------|-------|-----|-------|
 | NES.css | NES/Famicom | nostalgic-css.github.io/NES.css | Most popular, solid components |
 | RPGUI | RPG themed | ronenness.github.io/RPGUI | Game-like UI elements |
-| PaperCSS | Hand-drawn | getpapercss.com | Sketch aesthetic (not pixel, but retro) |
 | 98.css | Windows 98 | jdan.github.io/98.css | Classic OS nostalgia |
 | XP.css | Windows XP | botoxparty.github.io/XP.css | Luna theme recreation |
-| 7.css | Windows 7 | khang-nd.github.io/7.css | Aero glass aesthetic |
 
-### Canvas-Based (For Game-Like UIs)
-- **PixiJS**: 2D WebGL renderer, excellent for sprite-heavy UIs
-- **Phaser**: Full game framework, overkill for UI but powerful
-- **Konva**: Canvas library good for drag-and-drop inventory systems
+Canvas-based options: **PixiJS** (2D WebGL), **Phaser** (full game framework), **Konva** (drag-and-drop).
 
-### Custom Approach (Recommended)
-For most web UIs, a custom CSS approach using the variables and patterns in this skill produces the best results. Use CSS custom properties for theming, CSS Grid for layout, and CSS animations for effects. No framework dependency, full control, minimal bundle size.
+For most web UIs, a custom CSS approach using the variables and patterns in this skill produces the best results -- no framework dependency, full control, minimal bundle size.
 
 ## Integration with Modern Stacks
 
 ### HTMX + Retro Templates
-Server-rendered HTML with HTMX swaps. Apply retro CSS classes to server templates. SSE for live updates (score tickers, notifications). Ideal stack for the retro aesthetic because it keeps HTML semantic and adds behavior progressively.
+Server-rendered HTML with HTMX swaps. Apply retro CSS classes to server templates. SSE for live updates. Ideal for the retro aesthetic because it keeps HTML semantic and adds behavior progressively.
 
-### React / Vue / Svelte
-Create a retro component library wrapping the component templates from `references/component-templates.md`. Use CSS Modules or styled-components for scoped retro styles. Maintain the CSS custom properties at the root for theming.
-
-### Tailwind CSS
-Extend Tailwind config with pixel utilities:
+### Tailwind CSS Extension
 ```javascript
 // tailwind.config.js
 module.exports = {
@@ -408,10 +292,10 @@ module.exports = {
 
 Retro aesthetics must be inclusive:
 
-- **Font sizing**: Use `rem` for text, not `px`. The pixel sizes in this skill are guides -- implement as rem equivalents that respect user preferences
-- **Motion**: Wrap all animations in `@media (prefers-reduced-motion: no-preference)`. Provide a static fallback for scanlines, flicker, and noise effects
-- **Contrast**: Neon on dark already achieves WCAG AAA in most cases. Verify with contrast checkers. `#ff00ff` on `#0a0a0a` = 6.2:1 (AA pass). `#00ffff` on `#0a0a0a` = 16.3:1 (AAA pass)
-- **Focus indicators**: Use glowing pixel outlines instead of default browser outlines:
+- **Font sizing**: Use `rem` for text. The pixel sizes in this skill are guides -- implement as rem equivalents that respect user preferences
+- **Motion**: Wrap all animations in `@media (prefers-reduced-motion: no-preference)`. Provide static fallbacks
+- **Contrast**: Neon on dark achieves WCAG AAA in most cases. `#00ffff` on `#0a0a0a` = 16.3:1 (AAA). `#ff00ff` on `#0a0a0a` = 6.2:1 (AA)
+- **Focus indicators**: Glowing pixel outlines:
   ```css
   :focus-visible {
     outline: 2px solid var(--neon-secondary);
@@ -419,14 +303,19 @@ Retro aesthetics must be inclusive:
     box-shadow: 0 0 8px var(--neon-secondary);
   }
   ```
-- **Semantic HTML**: Under every pixel-art veneer, use proper `<nav>`, `<main>`, `<button>`, `<dialog>`, `<table>` elements. Screen readers see semantics, sighted users see pixels
-- **Keyboard navigation**: All interactive components must be keyboard-accessible. Menu cursor follows arrow key input. Tab order is logical
+- **Semantic HTML**: Under every pixel-art veneer, use proper `<nav>`, `<main>`, `<button>`, `<dialog>` elements
+- **Keyboard navigation**: All interactive components must be keyboard-accessible. Tab order is logical
 
 ## Performance
 
 - **Pixel fonts**: Subset to needed characters, serve as woff2. Press Start 2P full set is only ~8KB woff2
 - **CSS over JS**: All scanline, glow, and noise effects are pure CSS. No JS paint loops
-- **`will-change`**: Use sparingly and only on actively animating elements. Remove after animation completes
-- **Lazy decorative assets**: Sprite sheets, background tiles, and noise textures are decorative -- lazy load them
-- **Scanline/noise weight**: Opacity-based overlays on `::after` pseudo-elements have minimal paint cost. Avoid filters like `backdrop-filter` which trigger expensive compositing
-- **Animation budget**: Keep CSS animations under 16ms frame budget. `steps()` animations are inherently lightweight since they skip interpolation
+- **`will-change`**: Use sparingly, only on actively animating elements
+- **Scanline/noise weight**: Opacity-based overlays on `::after` pseudo-elements have minimal paint cost. Avoid `backdrop-filter`
+- **Animation budget**: Keep CSS animations under 16ms frame budget. `steps()` animations are inherently lightweight
+
+## Additional Resources
+
+- **`references/css-effects-library.md`** -- Complete, copy-paste CSS snippets for every retro effect: CRT scanlines (static and animated), screen curvature, neon text glow (5 variants + pulse animation), neon box glow, pixel borders (6 styles including RPG), screen noise/static, chromatic aberration (with animated glitch), typewriter cursor, pixel art scaling, dithering gradients, sprite animation, parallax backgrounds, pixel buttons, RPG dialog box, HP/MP bars, and retro scrollbars. Consult when implementing any visual effect.
+- **`references/component-templates.md`** -- Full HTML + CSS + JS component templates ready to drop into any project: RPG dialog box with typewriter JS, pixel menus with keyboard navigation, button variants, health/progress bars, inventory grids, navigation bars, cards/panels, form elements, toast notifications, loading states, and modal windows. Consult when building any UI component.
+- **`references/palettes.md`** -- Curated retro gaming color palettes with hex codes, RGB values, and usage guidelines: Cyberpunk Neon, NES (54 colors), Game Boy, SNES Warm, CGA 16-color, Synthwave/Vaporwave, Amber Terminal, and Green Terminal. Includes contrast ratios and palette combination advice. Consult when choosing or customizing a color scheme.
