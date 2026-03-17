@@ -111,6 +111,13 @@
       "category": "system-management",
       "source": "./plugins/toolbox-discovery",
       "homepage": "https://github.com/biodoia/biodoia-skills-marketplace"
+    },
+    {
+      "name": "voyage-memory",
+      "description": "Voyage AI permanent memory with SQLite-backed vector storage — embedding lifecycle, semantic search, namespace management, Go implementation patterns, and MCP integration",
+      "category": "ai-infrastructure",
+      "source": "./plugins/voyage-memory",
+      "homepage": "https://github.com/biodoia/biodoia-skills-marketplace"
     }
   ]
 }

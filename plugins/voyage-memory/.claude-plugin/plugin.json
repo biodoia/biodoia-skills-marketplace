@@ -1,0 +1,5 @@
+{
+  "name": "voyage-memory",
+  "description": "Voyage AI permanent memory with SQLite-backed vector storage — embedding lifecycle, semantic search, namespace management, Go implementation patterns, and MCP integration",
+  "version": "1.0.0"
+}
